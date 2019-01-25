@@ -11,9 +11,7 @@ jobs:
         environment:
           RAILS_ENV: test
 
-      - image: circleci/postgres:10-postgis
-        environment:
-          POSTGRES_USER: postgres
+      - image: circleci/postgres:10
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
