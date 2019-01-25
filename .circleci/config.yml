@@ -13,7 +13,7 @@ jobs:
 
       - image: circleci/postgres:10-postgis
         environment:
-          POSTGRES_USER: circleci
+          POSTGRES_USER: postgres
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
