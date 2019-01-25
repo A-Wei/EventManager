@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
@@ -12,6 +12,9 @@ jobs:
           RAILS_ENV: test
 
       - image: circleci/postgres:10
+        enviroment:
+          POSTGRES_USER: root
+          POSTGRES_DB: event_manager_test
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
