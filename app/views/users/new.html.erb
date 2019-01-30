@@ -1,0 +1,38 @@
+<section class='section'>
+  <container class='container'>
+    <div class='columns is-centered'>
+      <div class='column is-4'>
+        <h2 class='title is-2'>Sign up</h2>
+          <%= simple_form_for(@user, url: sign_up_path) do |f| %>
+            <%= render 'shared/error_messages' %>
+            <div class="field">
+              <label class='label'>Name</label>
+              <div class="control">
+                <%= f.input :name, label: false, required: true, autofocus: true, input_html: { class: 'input', id: 'name' } %>
+              </div>
+            </div>
+            <div class='field'>
+              <label class='label'>Email</label>
+              <div class='control'>
+                <%= f.input :email, label: false, required: true, input_html: { class: 'input', id: 'email' } %>
+              </div>
+            </div>
+            <div class='field'>
+              <label class='label'>Password</label>
+              <div class='control'>
+                <%= f.input :password, label: false, required: true, input_html: { class: 'input', id: 'password'} %>
+              </div>
+            </div>
+
+            <div class='field'>
+              <label class='label'>Password Confirmation</label>
+              <div class='control'>
+                <%= f.input :password_confirmation, label: false, required: true, input_html: { class: 'input', id: 'password_confirmation'} %>
+              </div>
+            </div>
+            <%= f.button :submit, 'Sign up', class: 'button is-outlined is-medium', id: 'sign_up' %>
+          <% end %>
+      </div>
+    </div>
+  <container class='container'>
+</section>
