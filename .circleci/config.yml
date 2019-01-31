@@ -15,6 +15,8 @@ jobs:
       - image: circleci/postgres:10
         enviroment:
           POSTGRES_USER: postgres
+          POSTGRES_DB: event_manager_test
+
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -44,8 +46,12 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run: bundle exec rake db:create --trace
-      - run: bundle exec rake db:schema:load
+      - run:
+          name: Set up DB
+            DATABASE_URL: 'postgres://ubuntu@localhost:5432/event_manager_test'
+          command: |
+            bundle exec rake db:create --trace
+            bundle exec rake db:schema:load
 
       # run tests!
       - run:
