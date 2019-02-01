@@ -49,12 +49,12 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run:
-          name: Set up DB
-            DATABASE_URL: 'postgres://ubuntu@localhost:5432/event_manager_test'
-          command: |
-            bundle exec rake db:create --trace
-            bundle exec rake db:schema:load
+      # - run:
+      #     name: Set up DB
+      #       DATABASE_URL: 'postgres://127.0.0.1@localhost:5432/event_manager_test'
+      #     command: |
+            run: bundle exec rake db:create --trace
+            run: bundle exec rake db:schema:load
 
       # run tests!
       - run:
