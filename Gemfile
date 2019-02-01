@@ -18,17 +18,18 @@ gem 'webpacker'
 gem 'bcrypt'
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'spring', '~> 2.0'
-  gem 'spring-commands-rspec', '~> 1.0'
-  gem 'spring-commands-rubocop', '~> 0.2'
   gem 'cypress-on-rails', '~> 1.0'
   gem 'dotenv-rails', '~> 2.1'
   gem 'factory_bot_rails', '~> 4.8'
   gem 'pry', '~> 0.10'
   gem 'pry-byebug', '~> 3.4'
   gem 'pry-rails', '~> 0.3'
+  gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
+  gem 'spring', '~> 2.0'
+  gem 'spring-commands-rspec', '~> 1.0'
+  gem 'spring-commands-rubocop', '~> 0.2'
 end
 
 group :development do
