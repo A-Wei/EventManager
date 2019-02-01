@@ -53,8 +53,8 @@ jobs:
       #     name: Set up DB
       #       DATABASE_URL: 'postgres://127.0.0.1@localhost:5432/event_manager_test'
       #     command: |
-            run: bundle exec rake db:create --trace
-            run: bundle exec rake db:schema:load
+           - run: bundle exec rake db:create --trace
+           - run: bundle exec rake db:schema:load
 
       # run tests!
       - run:
