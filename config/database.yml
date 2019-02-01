@@ -16,4 +16,3 @@ test: &TEST
   database: event_manager_test
 
 production:
-
