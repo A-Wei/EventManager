@@ -9,13 +9,16 @@ jobs:
       # specify the version you desire here
       - image: circleci/ruby:2.5.1-node-browsers
         environment:
+          PGHOST: 127.0.0.1
           BUNDLE_PATH: vendor/bundle
+          PGUSER: wei
           RAILS_ENV: test
 
       - image: circleci/postgres:10
         enviroment:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: wei
           POSTGRES_DB: event_manager_test
+          POSTGRES_PASSWORD: ''
 
 
       # Specify service dependencies here if necessary
