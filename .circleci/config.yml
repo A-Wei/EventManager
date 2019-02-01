@@ -1,13 +1,8 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.6.1-node-browsers
         environment:
           PGHOST: 127.0.0.1
           BUNDLE_PATH: vendor/bundle
@@ -20,22 +15,14 @@ jobs:
           POSTGRES_DB: event_manager_test
           POSTGRES_PASSWORD: ''
 
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
     working_directory: ~/repo
 
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
@@ -48,15 +35,10 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      # Database setup
-      # - run:
-      #     name: Set up DB
-      #       DATABASE_URL: 'postgres://127.0.0.1@localhost:5432/event_manager_test'
-      #     command: |
       - run: bundle exec rake db:create --trace
+
       - run: bundle exec rake db:schema:load
 
-      # run tests!
       - run:
           name: run tests
           command: |
@@ -69,9 +51,9 @@ jobs:
                             --format progress \
                             $TEST_FILES
 
-      # collect reports
       - store_test_results:
           path: /tmp/test-results
+
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
