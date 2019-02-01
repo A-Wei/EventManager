@@ -11,7 +11,7 @@ jobs:
         environment:
           PGHOST: 127.0.0.1
           BUNDLE_PATH: vendor/bundle
-          PGUSER: wei
+          PGUSER: postgres
           RAILS_ENV: test
 
       - image: circleci/postgres:10
