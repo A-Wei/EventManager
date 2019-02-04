@@ -48,3 +48,14 @@ build-iPhoneSimulator/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+# Static files
+/public/packs
+/public/packs-test
+
+# Package dependencies code
+/node_modules
+
+# yarn
+yarn-debug.log*
+.yarn-integrity
