@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <nav class='navbar is-link' role='navigation' aria-label='main navigation'>
+      <div class='navbar-brand'>
+        <%= link_to root_path, class:'navbar-item' do %>
+          <h1 class='title is-5 has-text-white'>EventManager</h1>
+        <% end %>
+      </div>
+      <div class='navbar-end'>
+        <p class='navbar-item'>Sign up</p>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
