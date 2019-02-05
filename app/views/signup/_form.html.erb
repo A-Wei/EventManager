@@ -1,8 +1,12 @@
 <%= simple_form_for(@user, url: signup_path) do |f| %>
   <%= render 'shared/error_messages' %>
-  <%= f.input :name, required: true, autofocus: true, input_html: { class: 'input' } %>
-  <%= f.input :email, required: true, input_html: { class: 'input' } %>
-  <%= f.input :password, required: true, input_html: { class: 'input' } %>
-  <%= f.input :password_confirmation, required: true, input_html: { class: 'input' } %>
+  <div class='field'>
+    <strong>
+      <%= f.input :name, required: true, autofocus: true, input_html: { class: 'input' } %>
+      <%= f.input :email, required: true, input_html: { class: 'input' } %>
+      <%= f.input :password, required: true, input_html: { class: 'input' } %>
+      <%= f.input :password_confirmation, required: true, input_html: { class: 'input' } %>
+    </strong>
+  </div>
   <%= f.button :submit, 'Sign up', class: 'button is-outlined is-medium is-primary' %>
 <% end %>
