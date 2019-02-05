@@ -2,10 +2,25 @@
   <%= render 'shared/error_messages' %>
   <div class='field'>
     <strong>
-      <%= f.input :name, required: true, autofocus: true, input_html: { class: 'input' } %>
-      <%= f.input :email, required: true, input_html: { class: 'input' } %>
-      <%= f.input :password, required: true, input_html: { class: 'input' } %>
-      <%= f.input :password_confirmation, required: true, input_html: { class: 'input' } %>
+      <%=
+        f.input(
+          :name,
+          required: true,
+          error: false,
+          autofocus: true,
+          input_html: { class: 'input' },
+        )
+      %>
+      <%= f.input :email, required: true, error: false, input_html: { class: 'input' } %>
+      <%= f.input :password, required: true, error: false, input_html: { class: 'input' } %>
+      <%=
+        f.input(
+          :password_confirmation,
+          required: true,
+          error: false,
+          input_html: { class: 'input' },
+        )
+      %>
     </strong>
   </div>
   <%= f.button :submit, 'Sign up', class: 'button is-outlined is-medium is-primary' %>
