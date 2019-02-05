@@ -12,6 +12,7 @@ RSpec.describe "User signs up", type: :system do
       click_button 'Sign up'
 
       expect(page).to have_text('Hello Test User, Welcome to EventManager')
+      expect(page).to have_xpath("//img[@class='gravatar']")
     end
   end
 
