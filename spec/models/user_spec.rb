@@ -2,38 +2,28 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:email) }
-    it { should_not allow_value('test@testcom').for(:email) }
-    it 'validates uniquess of email' do
-      create(:user, password: 'foobar', password_confirmation: 'foobar')
-      should validate_uniqueness_of(:email).case_insensitive
+    describe '#name' do
+      it { is_expected.to validate_presence_of(:name) }
+    end
+
+    describe '#email' do
+      subject { build(:user) }
+
+      it { is_expected.to validate_presence_of(:email) }
+      it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+      it { is_expected.to allow_value('test@example.com').for(:email) }
+      it { is_expected.not_to allow_value('test@examplecom').for(:email) }
+    end
+
+    describe '#password' do
+      it { is_expected.to validate_presence_of(:password) }
+      it { is_expected.to validate_length_of(:password).is_at_least(6) }
     end
   end
 
-  describe '.new' do
-    it 'creates a valid user when email is valid' do
-      user = create(
-        :user,
-        name: 'test',
-        email: 'test@test.com',
-        password: 'foobar',
-        password_confirmation: 'foobar',
-      )
-
-      expect(user).to be_valid
-    end
-  end
-
-  describe '#downcase' do
-    it 'saves the emails as lower-case' do
-      user = create(
-        :user,
-        name: 'test',
-        email: 'TeSt@tEsT.cOm',
-        password: 'foobar',
-        password_confirmation: 'foobar',
-      )
+  describe 'before_create' do
+    it 'saves the emails as lowercase' do
+      user = create(:user, email: 'TeSt@tEsT.cOm')
 
       expect(user.email).to eq('test@test.com')
     end
