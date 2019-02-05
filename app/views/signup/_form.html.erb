@@ -1,28 +1,8 @@
 <%= simple_form_for(@user, url: signup_path) do |f| %>
   <%= render 'shared/error_messages' %>
-  <div class="field">
-    <label class='label'>Name</label>
-    <div class="control">
-      <%= f.input :name, label: false, required: true, autofocus: true, input_html: { class: 'input', id: 'name' } %>
-    </div>
-  </div>
-  <div class='field'>
-    <label class='label'>Email</label>
-    <div class='control'>
-      <%= f.input :email, label: false, required: true, input_html: { class: 'input', id: 'email' } %>
-    </div>
-  </div>
-  <div class='field'>
-    <label class='label'>Password</label>
-    <div class='control'>
-      <%= f.input :password, label: false, required: true, input_html: { class: 'input', id: 'password'} %>
-    </div>
-  </div>
-  <div class='field'>
-    <label class='label'>Password Confirmation</label>
-    <div class='control'>
-      <%= f.input :password_confirmation, label: false, required: true, input_html: { class: 'input', id: 'password_confirmation'} %>
-    </div>
-  </div>
-  <%= f.button :submit, 'Sign up', class: 'button is-outlined is-medium is-primary', id: 'sign_up' %>
+  <%= f.input :name, required: true, autofocus: true, input_html: { class: 'input' } %>
+  <%= f.input :email, required: true, input_html: { class: 'input' } %>
+  <%= f.input :password, required: true, input_html: { class: 'input' } %>
+  <%= f.input :password_confirmation, required: true, input_html: { class: 'input' } %>
+  <%= f.button :submit, 'Sign up', class: 'button is-outlined is-medium is-primary' %>
 <% end %>

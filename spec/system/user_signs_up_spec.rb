@@ -5,11 +5,11 @@ RSpec.describe "User signs up", type: :system do
     it 'allows guest to create an user' do
       visit '/signup'
 
-      fill_in 'name', with: 'Test User'
-      fill_in 'email', with: 'test@user.com'
-      fill_in 'password', with: '123456'
-      fill_in 'password_confirmation', with: '123456'
-      click_button 'sign_up'
+      fill_in 'Name', with: 'Test User'
+      fill_in 'Email', with: 'test@example.com'
+      fill_in 'Password', with: '123456', id: 'user_password'
+      fill_in 'Password confirmation', with: '123456', id: 'user_password_confirmation'
+      click_button 'Sign up'
 
       expect(page).to have_text('Hello Test User, Welcome to EventManager')
     end
@@ -19,10 +19,10 @@ RSpec.describe "User signs up", type: :system do
     it "shows 'name can't be blank' message when the name is not given" do
       visit '/signup'
 
-      fill_in 'email', with: 'test@user.com'
-      fill_in 'password', with: '123456'
-      fill_in 'password_confirmation', with: '123456'
-      click_button 'sign_up'
+      fill_in 'Email', with: 'test@example.com'
+      fill_in 'Password', with: '123456', id: 'user_password'
+      fill_in 'Password confirmation', with: '123456', id: 'user_password_confirmation'
+      click_button 'Sign up'
 
       expect(page).to have_text("Name can't be blank")
     end
@@ -30,10 +30,10 @@ RSpec.describe "User signs up", type: :system do
     it "shows 'email can not be blank' message when the email is not given" do
       visit '/signup'
 
-      fill_in 'name', with: 'Test User'
-      fill_in 'password', with: '123456'
-      fill_in 'password_confirmation', with: '123456'
-      click_button 'sign_up'
+      fill_in 'Name', with: 'Test User'
+      fill_in 'Password', with: '123456', id: 'user_password'
+      fill_in 'Password confirmation', with: '123456', id: 'user_password_confirmation'
+      click_button 'Sign up'
 
       expect(page).to have_text("Email can't be blank")
     end
@@ -41,11 +41,11 @@ RSpec.describe "User signs up", type: :system do
     it "shows 'email is invalid' message when the email is incorrect" do
       visit '/signup'
 
-      fill_in 'name', with: 'Test User'
-      fill_in 'email', with: 'test@usercom'
-      fill_in 'password', with: '123456'
-      fill_in 'password_confirmation', with: '123456'
-      click_button 'sign_up'
+      fill_in 'Name', with: 'Test User'
+      fill_in 'Email', with: 'test@example'
+      fill_in 'Password', with: '123456', id: 'user_password'
+      fill_in 'Password confirmation', with: '123456', id: 'user_password_confirmation'
+      click_button 'Sign up'
 
       expect(page).to have_text('Email is invalid')
     end
@@ -53,11 +53,11 @@ RSpec.describe "User signs up", type: :system do
     it "shows 'password is invalid, minimum 6 characters' message when password is too short" do
       visit '/signup'
 
-      fill_in 'name', with: 'Test User'
-      fill_in 'email', with: 'test@usercom'
-      fill_in 'password', with: '12345'
-      fill_in 'password_confirmation', with: '12345'
-      click_button 'sign_up'
+      fill_in 'Name', with: 'Test User'
+      fill_in 'Email', with: 'test@example.com'
+      fill_in 'Password', with: '12345', id: 'user_password'
+      fill_in 'Password confirmation', with: '12345', id: 'user_password_confirmation'
+      click_button 'Sign up'
 
       expect(page).to have_text('Password is too short (minimum is 6 characters)')
     end
