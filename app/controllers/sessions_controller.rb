@@ -22,6 +22,6 @@ class SessionsController < ApplicationController
   end
 
   def validate_user
-    UserValidation.validate(user: user, password: session_params[:password] )
+    UserValidation.new.validate(user, session_params[:password] )
   end
 end
