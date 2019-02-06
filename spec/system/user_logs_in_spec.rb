@@ -10,8 +10,8 @@ RSpec.describe 'User logs in', type: :system do
         password: 'foobar',
         password_confirmation: 'foobar'
       )
-      visit '/login'
 
+      visit '/login'
       fill_in 'Email', with: 'bob@example.com'
       fill_in 'Password', with: 'foobar'
       click_button 'Log in'
@@ -29,8 +29,8 @@ RSpec.describe 'User logs in', type: :system do
         password: 'foobar',
         password_confirmation: 'foobar'
       )
-      visit '/login'
 
+      visit '/login'
       fill_in 'Email', with: 'test_user@example.com'
       fill_in 'Password', with: 'foobar'
       click_button 'Log in'
@@ -46,8 +46,8 @@ RSpec.describe 'User logs in', type: :system do
         password: 'foobar',
         password_confirmation: 'foobar'
       )
-      visit '/login'
 
+      visit '/login'
       fill_in 'Email', with: 'bob@example.com'
       fill_in 'Password', with: 'foobarr'
       click_button 'Log in'
