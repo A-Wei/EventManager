@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User logs in', type: :system do
   context 'when the login data is valid' do
     it 'allows the user to login and redirect to welcome page' do
-      build(
+      create(
         :user,
         name: 'Bob',
         email: 'bob@example.com',
@@ -22,7 +22,7 @@ RSpec.describe 'User logs in', type: :system do
 
   context 'when the login data is incorrect' do
     it "shows 'Incorrect email or password, try again.' when email is incorrect" do
-      build(
+      create(
         :user,
         name: 'Bob',
         email: 'bob@example.com',
@@ -39,7 +39,7 @@ RSpec.describe 'User logs in', type: :system do
     end
 
     it "shows 'Incorrect email or password, try again.' when password is incorrect" do
-      build(
+      create(
         :user,
         name: 'Bob',
         email: 'bob@example.com',
