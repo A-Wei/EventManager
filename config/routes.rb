@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   get '/signup' => 'signup#new'
   post '/signup' => 'signup#create'
 
+  get '/login' => 'sessions#new'
   resources :users, only: [:show]
 end
