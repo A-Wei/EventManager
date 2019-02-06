@@ -1,0 +1,10 @@
+<%= simple_form_for(:session, url: login_path) do |f| %>
+  <div class='field'>
+    <strong>
+      <%= f.input :email, required: true, error: false, input_html: { class: 'input' } %>
+      <%= f.input :password, required: true, error: false, input_html: { class: 'input' } %>
+    </strong>
+  </div>
+  <%= f.button :submit, 'Log in', class: 'button is-outlined is-medium is-primary' %>
+  <p>New user? <%= link_to 'Sign up now', signup_path %></p>
+<% end %>
