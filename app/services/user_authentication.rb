@@ -1,6 +1,6 @@
-class UserValidation
-  def self.validate(*args)
-    new(*args).validate
+class UserAuthentication
+  def self.call(*args)
+    new(*args).call
   end
 
   def initialize(user:, password:)
@@ -8,7 +8,7 @@ class UserValidation
     @password = password
   end
 
-  def validate
+  def call
     user && user.authenticate(password)
   end
 
