@@ -63,4 +63,13 @@ RSpec.describe "User signs up", type: :system do
       expect(page).to have_text('Password is too short (minimum is 6 characters)')
     end
   end
+
+  context 'when a guest at /login page' do
+    it "redirects to /signup after clicking the 'Sign up now' button" do
+      visit '/login'
+      click_link 'Sign up now'
+
+      expect(page).to have_button('Sign up')
+    end
+  end
 end
