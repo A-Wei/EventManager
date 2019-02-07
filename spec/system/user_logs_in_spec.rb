@@ -8,7 +8,7 @@ RSpec.describe 'User logs in', type: :system do
         name: 'Bob',
         email: 'bob@example.com',
         password: 'foobar',
-        password_confirmation: 'foobar'
+        password_confirmation: 'foobar',
       )
 
       visit '/login'
@@ -27,7 +27,7 @@ RSpec.describe 'User logs in', type: :system do
         name: 'Bob',
         email: 'bob@example.com',
         password: 'foobar',
-        password_confirmation: 'foobar'
+        password_confirmation: 'foobar',
       )
 
       visit '/login'
@@ -44,7 +44,7 @@ RSpec.describe 'User logs in', type: :system do
         name: 'Bob',
         email: 'bob@example.com',
         password: 'foobar',
-        password_confirmation: 'foobar'
+        password_confirmation: 'foobar',
       )
 
       visit '/login'

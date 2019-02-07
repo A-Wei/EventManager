@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User signs up", type: :system do
+RSpec.describe 'User signs up', type: :system do
   context 'when the sign up data is valid' do
     it 'allows guest to create an user' do
       visit '/signup'
