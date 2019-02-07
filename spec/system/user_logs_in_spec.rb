@@ -49,7 +49,7 @@ RSpec.describe 'User logs in', type: :system do
 
       visit '/login'
       fill_in 'Email', with: 'bob@example.com'
-      fill_in 'Password', with: 'foobarr'
+      fill_in 'Password', with: 'incorrect_password'
       click_button 'Log in'
 
       expect(page).to have_text('Incorrect email or password, try again.')
