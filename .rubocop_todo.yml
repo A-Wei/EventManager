@@ -46,6 +46,11 @@ Lint/UnusedBlockArgument:
 # URISchemes: http, https
 Metrics/LineLength:
   Max: 216
+  IgnoredPatterns: ['\A#']
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/initializers/simple_form.rb'
+    - 'config/environments/production.rb'
 
 # Offense count: 1
 # Configuration parameters: AggregateFailuresByDefault.
