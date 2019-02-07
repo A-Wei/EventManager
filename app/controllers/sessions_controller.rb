@@ -22,6 +22,6 @@ class SessionsController < ApplicationController
   end
 
   def authenticate_user
-    UserAuthentication.call(user: user, password: session_params[:password] )
+    AuthenticateUser.call(user: user, password: session_params[:password] )
   end
 end
