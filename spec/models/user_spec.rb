@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
 
   describe '#signed_in?' do
     it 'returns true' do
-      expect(User.new.signed_in?).to be true
+      expect(User.new.signed_in?).to eq(true)
     end
   end
 end
