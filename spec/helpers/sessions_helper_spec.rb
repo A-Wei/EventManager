@@ -15,8 +15,6 @@ RSpec.describe SessionsHelper do
 
     context 'when user is not logged in' do
       it 'sets the current_user to nil' do
-        ActionController::TestSession.new
-
         current_user
 
         expect(current_user).to eq(nil)
