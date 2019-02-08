@@ -28,4 +28,10 @@ RSpec.describe User, type: :model do
       expect(user.email).to eq('test@test.com')
     end
   end
+
+  describe '#signed_in?' do
+    it 'returns true' do
+      expect(User.new.signed_in?).to be true
+    end
+  end
 end
