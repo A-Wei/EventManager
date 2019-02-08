@@ -146,3 +146,6 @@ RSpec/ImplicitSubject:
 
 RSpec/PredicateMatcher:
   Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false

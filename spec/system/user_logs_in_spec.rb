@@ -17,6 +17,7 @@ RSpec.describe 'User logs in', type: :system do
       click_button 'Log in'
 
       expect(page).to have_text('Hello Bob, Welcome to EventManager')
+      expect(page).to have_text('Log out')
     end
   end
 
