@@ -6,11 +6,17 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: session_params[:email])
 
     if authenticate_user
+      session[:user_id] = user.id.to_s
       redirect_to user_url(user)
     else
       flash[:error] = 'Incorrect email or password, try again.'
       render 'new'
     end
+  end
+
+  def destroy
+    session.delete(:user_id)
+    redirect_to root_path
   end
 
   private
