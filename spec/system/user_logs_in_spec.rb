@@ -18,8 +18,6 @@ RSpec.describe 'User logs in', type: :system do
 
       expect(page).to have_text('Hello Bob, Welcome to EventManager')
       expect(page).to have_text('Log out')
-      expect(page).not_to have_text('Sign up')
-      expect(page).not_to have_text('Log in')
     end
   end
 
