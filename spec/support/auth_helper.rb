@@ -11,6 +11,6 @@ module AuthHelper
   end
 end
 
-RSpec.configure do |c|
-  c.include AuthHelper
+RSpec.configure do |config|
+  config.include AuthHelper, type: :system
 end
