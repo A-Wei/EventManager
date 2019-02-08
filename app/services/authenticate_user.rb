@@ -9,7 +9,7 @@ class AuthenticateUser
   end
 
   def call
-    user && user.authenticate(password)
+    user && user&.authenticate(password)
   end
 
   attr_reader :user, :password

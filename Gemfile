@@ -27,6 +27,8 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails', '>= 3.8'
   gem 'rspec_junit_formatter', '>= 0.4'
+  gem 'rubocop', '~> 0.63', require: false
+  gem 'rubocop-rspec', '~> 1.32', require: false
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'

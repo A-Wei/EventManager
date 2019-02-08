@@ -36,7 +36,7 @@ RSpec.describe AuthenticateUser do
     end
 
     context 'when user not signed up' do
-      it "returns nil" do
+      it 'returns nil' do
         password = 'foobar'
         user = nil
 
