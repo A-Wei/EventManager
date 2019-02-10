@@ -20,7 +20,7 @@
         <% if current_user.signed_in? %>
           <%= link_to 'Log out', logout_path, method: :delete, class:'navbar-item' %>
         <% else %>
-          <%= link_to 'Sign up', signup_path, class:'navbar-item' %>
+          <%= link_to 'Log in', login_path, class:'navbar-item' %>
         <% end %>
       </div>
     </nav>

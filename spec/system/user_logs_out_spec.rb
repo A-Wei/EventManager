@@ -8,6 +8,6 @@ RSpec.describe 'User logs out', type: :system do
     logout
 
     expect(page).to have_current_path(root_path)
-    expect(page).to have_text('Sign up')
+    expect(page).to have_text('Log in')
   end
 end
