@@ -5,11 +5,10 @@ RSpec.describe 'User updates profile', type: :system do
     context 'and visit his/her own profile page' do
       it 'shows a form and save changes made after click the update button' do
         user = create(:user, name: 'Alice')
+
         login(user)
         click_link 'Profile'
-
         fill_in 'Name', with: 'Bob'
-
         click_button 'Update'
 
         expect(user.name).to eq('Bob')
@@ -22,7 +21,7 @@ RSpec.describe 'User updates profile', type: :system do
         create(:user, id: 2)
 
         login(user1)
-        visit'/users/2/edit'
+        visit '/users/2/edit'
 
         expect(page.current_url).to eq('/users/1')
       end
@@ -33,7 +32,7 @@ RSpec.describe 'User updates profile', type: :system do
     it 'redirects to log in when try to visit profile page' do
       user = create(:user, id: 1)
 
-      visit'/users/1/edit'
+      visit '/users/1/edit'
 
       expect(page.current_path).to eq(login_path)
     end
