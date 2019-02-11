@@ -83,6 +83,9 @@ Style/MultilineBlockChain:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#single-line-blocks
   Enabled: false
 
+Style/NegatedIf:
+  Enabled: false
+
 Style/TrailingCommaInArguments:
   Enabled: true
   EnforcedStyleForMultiline: comma
