@@ -1,5 +1,5 @@
 class Guest
-  def signed_in?
+  def logged_in?
     false
   end
 end

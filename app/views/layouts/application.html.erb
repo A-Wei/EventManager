@@ -17,7 +17,7 @@
         <% end %>
       </div>
       <div class='navbar-end'>
-        <% if current_user.signed_in? %>
+        <% if current_user.logged_in? %>
           <%= link_to 'Profile', edit_user_path(current_user), class:'navbar-item' %>
           <%= link_to 'Log out', logout_path, method: :delete, class:'navbar-item' %>
         <% else %>

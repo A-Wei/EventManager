@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def signed_in?
+  def logged_in?
     true
   end
 end
