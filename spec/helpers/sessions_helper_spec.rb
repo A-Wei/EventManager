@@ -14,10 +14,10 @@ RSpec.describe SessionsHelper do
     end
 
     context 'when user is not logged in' do
-      it 'sets the current_user to nil' do
+      it 'sets the current_user to a Guest object' do
         current_user
 
-        expect(current_user).to eq(nil)
+        expect(current_user).to be_an_instance_of(Guest)
       end
     end
   end
