@@ -5,4 +5,12 @@ class UsersController < ApplicationController
 
   def edit
   end
+
+  def update
+    if @user.update_attributes(user_params)
+      render 'show'
+    else
+      render 'edit'
+    end
+  end
 end
