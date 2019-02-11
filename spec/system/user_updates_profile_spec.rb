@@ -16,25 +16,25 @@ RSpec.describe 'User updates profile', type: :system do
     end
 
     context "and visit other user's profile page" do
-      it "redirects to user's own show page" do
+      it 'redirects to root_path' do
         user1 = create(:user, id: 1)
         create(:user, id: 2)
 
         login(user1)
         visit '/users/2/edit'
 
-        expect(page.current_url).to eq('/users/1')
+        expect(page).to have_current_path(root_path)
       end
     end
   end
 
   context 'when user is not logged in' do
     it 'redirects to log in when try to visit profile page' do
-      user = create(:user, id: 1)
+      create(:user, id: 1)
 
       visit '/users/1/edit'
 
-      expect(page.current_path).to eq(login_path)
+      expect(page).to have_current_path(login_path)
     end
   end
 end

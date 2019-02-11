@@ -43,11 +43,8 @@ Layout/AlignParameters:
 Layout/AlignHash:
   Enabled: false
 
-Style/Documentation:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
+Layout/DotPosition:
+  EnforcedStyle: leading
 
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
@@ -55,12 +52,15 @@ Layout/FirstParameterIndentation:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/LambdaCall:
   Exclude:
     - '**/*.jbuilder'
-
-Layout/DotPosition:
-  EnforcedStyle: leading
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
@@ -69,6 +69,9 @@ Style/BlockDelimiters:
   Description: Avoid using {...} for multi-line blocks (multiline chaining is always
     ugly). Prefer {...} over do...end for single-line blocks.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#single-line-blocks
+  Enabled: false
+
+Style/IfUnlessModifier:
   Enabled: false
 
 Style/Lambda:
@@ -108,6 +111,9 @@ Style/Attr:
   Exclude:
     - db/schema.rb
 
+Style/EmptyMethod:
+  Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
 
@@ -145,7 +151,4 @@ RSpec/ImplicitSubject:
   EnforcedStyle: single_statement_only
 
 RSpec/PredicateMatcher:
-  Enabled: false
-
-Style/IfUnlessModifier:
   Enabled: false
