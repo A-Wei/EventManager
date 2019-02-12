@@ -17,13 +17,18 @@
         <% end %>
       </div>
       <div class='navbar-end'>
-        <% if current_user.signed_in? %>
+        <% if current_user.logged_in? %>
+          <%= link_to 'Profile', edit_user_path(current_user), class:'navbar-item' %>
           <%= link_to 'Log out', logout_path, method: :delete, class:'navbar-item' %>
         <% else %>
           <%= link_to 'Log in', login_path, class:'navbar-item' %>
         <% end %>
       </div>
     </nav>
+    <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
+
     <%= yield %>
   </body>
 </html>

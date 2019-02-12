@@ -1,4 +1,4 @@
-<%= simple_form_for(@user, url: signup_path) do |f| %>
+<%= simple_form_for(@user, url: yield(:path)) do |f| %>
   <%= render 'shared/error_messages' %>
   <div class='field'>
     <strong>
@@ -23,5 +23,5 @@
       %>
     </strong>
   </div>
-  <%= f.button :submit, 'Sign up', class: 'button is-outlined is-medium is-primary' %>
+  <%= f.button :submit, yield(:button_text), class: 'button is-outlined is-medium is-primary' %>
 <% end %>

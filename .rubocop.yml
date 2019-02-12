@@ -43,11 +43,8 @@ Layout/AlignParameters:
 Layout/AlignHash:
   Enabled: false
 
-Style/Documentation:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
+Layout/DotPosition:
+  EnforcedStyle: leading
 
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
@@ -55,12 +52,15 @@ Layout/FirstParameterIndentation:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/LambdaCall:
   Exclude:
     - '**/*.jbuilder'
-
-Layout/DotPosition:
-  EnforcedStyle: leading
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
@@ -71,6 +71,9 @@ Style/BlockDelimiters:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#single-line-blocks
   Enabled: false
 
+Style/IfUnlessModifier:
+  Enabled: false
+
 Style/Lambda:
   Description: 'Use the new lambda literal syntax for single-line blocks.'
   Enabled: false
@@ -78,6 +81,9 @@ Style/Lambda:
 Style/MultilineBlockChain:
   Description: 'Avoid multi-line chains of blocks.'
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#single-line-blocks
+  Enabled: false
+
+Style/NegatedIf:
   Enabled: false
 
 Style/TrailingCommaInArguments:
@@ -107,6 +113,9 @@ Style/TrailingCommaInArrayLiteral:
 Style/Attr:
   Exclude:
     - db/schema.rb
+
+Style/EmptyMethod:
+  Enabled: false
 
 Metrics/BlockLength:
   Enabled: false
@@ -145,7 +154,4 @@ RSpec/ImplicitSubject:
   EnforcedStyle: single_statement_only
 
 RSpec/PredicateMatcher:
-  Enabled: false
-
-Style/IfUnlessModifier:
   Enabled: false
