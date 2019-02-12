@@ -11,17 +11,17 @@ RSpec.describe 'User updates their profile', type: :system do
         fill_in 'Name', with: 'Bob'
         click_button 'Update'
 
-        expect(user.name).to eq('Bob')
+        expect(page).to have_text('Bob')
       end
     end
 
     context "when visiting other user's profile page" do
       it 'redirects to root_path' do
-        user1 = create(:user, id: 1)
-        create(:user, id: 2)
+        user1 = create(:user)
+        user2 = create(:user)
 
         login(user1)
-        visit '/users/2/edit'
+        visit edit_user_path(user2)
 
         expect(page).to have_current_path(root_path)
       end
@@ -29,10 +29,10 @@ RSpec.describe 'User updates their profile', type: :system do
   end
 
   context 'when user is not logged in' do
-      create(:user, id: 1)
     it 'redirects to the login_path when trying to visit profile page' do
+      user = create(:user)
 
-      visit '/users/1/edit'
+      visit edit_user_path(user)
 
       expect(page).to have_current_path(login_path)
     end
