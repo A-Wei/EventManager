@@ -9,9 +9,23 @@ RSpec.describe 'User updates their profile', type: :system do
         login(user)
         click_link 'Profile'
         fill_in 'Name', with: 'Bob'
+        fill_in 'Password', with: 'new_password', id: 'user_password'
+        fill_in 'Password confirmation', with: 'new_password',  id: 'user_password_confirmation'
         click_button 'Update'
 
         expect(page).to have_text('Bob')
+      end
+
+      it 'displays an error when password does not match' do
+        user = create(:user)
+
+        login(user)
+        click_link 'Profile'
+        fill_in 'Password', with: 'new_password', id: 'user_password'
+        fill_in 'Password confirmation', with: 'old_password',  id: 'user_password_confirmation'
+        click_button 'Update'
+
+        expect(page).to have_text("Password confirmation doesn't match")
       end
     end
 
