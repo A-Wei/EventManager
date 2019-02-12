@@ -34,6 +34,7 @@ RSpec.describe 'User updates their profile', type: :system do
 
       visit edit_user_path(user)
 
+      expect(page).to have_text('Please log in.')
       expect(page).to have_current_path(login_path)
     end
   end
