@@ -4,11 +4,12 @@ RSpec.describe 'User updates their profile', type: :system do
   context 'when the user is logged in' do
     context 'when they click the "Profile" button' do
       it 'saves changes made after submitting the form' do
-        user = create(:user, name: 'Alice')
+        user = create(:user, name: 'Alice', email: 'alice@example.com')
 
         login(user)
         click_link 'Profile'
         fill_in 'Name', with: 'Bob'
+        fill_in 'Email', with: 'bob@example.com'
         fill_in 'Password', with: 'new_password', id: 'user_password'
         fill_in 'Password confirmation', with: 'new_password', id: 'user_password_confirmation'
         click_button 'Update'
