@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user != current_user
+      flash[:danger] = 'Not authorized.'
       redirect_to root_url
     end
   end

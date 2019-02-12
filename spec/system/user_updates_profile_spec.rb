@@ -23,6 +23,7 @@ RSpec.describe 'User updates their profile', type: :system do
         login(user1)
         visit edit_user_path(user2)
 
+        expect(page).to have_text('Not authorized.')
         expect(page).to have_current_path(root_path)
       end
     end
