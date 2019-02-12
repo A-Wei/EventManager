@@ -17,6 +17,28 @@ RSpec.describe 'User updates their profile', type: :system do
         expect(page).to have_text('Bob')
       end
 
+      it 'displays an error when the name is left empty' do
+        user = create(:user)
+
+        login(user)
+        click_link 'Profile'
+        fill_in 'Name', with: ''
+        click_button 'Update'
+
+        expect(page).to have_text("Name can't be blank")
+      end
+
+      it 'displays an error when the email is left empty' do
+        user = create(:user)
+
+        login(user)
+        click_link 'Profile'
+        fill_in 'Email', with: ''
+        click_button 'Update'
+
+        expect(page).to have_text("Email can't be blank")
+      end
+
       it 'displays an error when password does not match' do
         user = create(:user)
 
