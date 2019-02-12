@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'User updates profile', type: :system do
-  context 'when user is logged in' do
-    context 'when clicks profile button' do
-      it 'shows a form and save changes made after click the update button' do
+RSpec.describe 'User updates their profile', type: :system do
+  context 'when the user is logged in' do
+    context 'when they click the "Profile" button' do
+      it 'saves changes made after submitting the form' do
         user = create(:user, name: 'Alice')
 
         login(user)
@@ -15,7 +15,7 @@ RSpec.describe 'User updates profile', type: :system do
       end
     end
 
-    context "when visit other user's profile page" do
+    context "when visiting other user's profile page" do
       it 'redirects to root_path' do
         user1 = create(:user, id: 1)
         create(:user, id: 2)
@@ -29,8 +29,8 @@ RSpec.describe 'User updates profile', type: :system do
   end
 
   context 'when user is not logged in' do
-    it 'redirects to login_path when try to visit profile page' do
       create(:user, id: 1)
+    it 'redirects to the login_path when trying to visit profile page' do
 
       visit '/users/1/edit'
 
