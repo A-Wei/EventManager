@@ -11,7 +11,7 @@ RSpec.describe 'User resets their password', type: :system do
         click_link 'forget password'
         fill_in 'Email', with: 'alice@example.com'
         click_button 'Submit'
-        visit edit_password_reset_path(user.email)
+        visit edit_password_reset_path(user.password_reset_token, email: user.email))
         fill_in 'Password', with: password, id: 'user_password'
         fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
         click_button 'Update'
@@ -29,7 +29,7 @@ RSpec.describe 'User resets their password', type: :system do
         click_link 'forget password'
         fill_in 'Email', with: 'alice@example.com'
         click_button 'Submit'
-        visit edit_password_reset_path(user.email)
+        visit edit_password_reset_path(user.password_reset_token, email: user.email))
         fill_in 'Password', with: password, id: 'user_password'
         fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
         click_button 'Update'
@@ -45,7 +45,7 @@ RSpec.describe 'User resets their password', type: :system do
         click_link 'forget password'
         fill_in 'Email', with: 'alice@example.com'
         click_button 'Submit'
-        visit edit_password_reset_path(user.email)
+        visit edit_password_reset_path(user.password_reset_token, email: user.email))
         fill_in 'Password', with: password, id: 'user_password'
         fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
         click_button 'Update'
@@ -61,7 +61,7 @@ RSpec.describe 'User resets their password', type: :system do
         click_link 'forget password'
         fill_in 'Email', with: 'alice@example.com'
         click_button 'Submit'
-        visit edit_password_reset_path(user.email)
+        visit edit_password_reset_path(user.password_reset_token, email: user.email))
         fill_in 'Password', with: password, id: 'user_password'
         fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
         click_button 'Update'
