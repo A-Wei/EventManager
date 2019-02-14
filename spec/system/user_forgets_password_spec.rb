@@ -4,67 +4,47 @@ RSpec.describe 'User resets their password', type: :system do
   context 'when clicks "forget password"' do
     context 'when the email exist and user opens reset password page' do
       it 'resets user password if the new password is valid and redirects to login page' do
-        user = create(:user, email: 'alice@example.com')
-        password = 'new_password'
+        user = create(:user)
+        new_password = 'new_password'
 
-        visit '/login'
-        click_link 'forget password'
-        fill_in 'Email', with: 'alice@example.com'
-        click_button 'Submit'
-        visit edit_password_reset_path(user.password_reset_token, email: user.email))
-        fill_in 'Password', with: password, id: 'user_password'
-        fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
-        click_button 'Update'
+        forget_password(user.email)
+        open_password_reset_page(user)
+        reset_password(user)
 
-        authentication = user.authenticate('new_password')
-        expect(authentication).to eq(user)
+        authenticated_user = user.authenticate(new_password)
+        expect(authenticated_user).to eq(user)
         expect(page).to have_current_path(login_path)
       end
 
       it "show a 'password can't be blank' error if new password is blank" do
-        user = create(:user, email: 'alice@example.com')
-        password = ''
+        user = create(:user)
+        new_password = ''
 
-        visit '/login'
-        click_link 'forget password'
-        fill_in 'Email', with: 'alice@example.com'
-        click_button 'Submit'
-        visit edit_password_reset_path(user.password_reset_token, email: user.email))
-        fill_in 'Password', with: password, id: 'user_password'
-        fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
-        click_button 'Update'
+        forget_password(user.email)
+        open_password_reset_page(user)
+        reset_password(new_password)
 
         expect(page).to to_have_text("Password can't be blank")
       end
 
       it "show a 'password too short' error if new password is too short" do
-        user = create(:user, email: 'alice@example.com')
-        password = '12345'
+        user = create(:user)
+        new_password = '12345'
 
-        visit '/login'
-        click_link 'forget password'
-        fill_in 'Email', with: 'alice@example.com'
-        click_button 'Submit'
-        visit edit_password_reset_path(user.password_reset_token, email: user.email))
-        fill_in 'Password', with: password, id: 'user_password'
-        fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
-        click_button 'Update'
+        forget_password(user.email)
+        open_password_reset_page(user)
+        reset_password(new_password)
 
         expect(page).to to_have_text('Password is too short')
       end
 
       it "show a 'password doesn't math' error if passwords does't match" do
-        user = create(:user, email: 'alice@example.com')
-        password = '12345'
+        user = create(:user)
+        new_password = 'new_password'
 
-        visit '/login'
-        click_link 'forget password'
-        fill_in 'Email', with: 'alice@example.com'
-        click_button 'Submit'
-        visit edit_password_reset_path(user.password_reset_token, email: user.email))
-        fill_in 'Password', with: password, id: 'user_password'
-        fill_in 'Password confirmation', with: password, id: 'user_password_comfirmation'
-        click_button 'Update'
+        forget_password(user.email)
+        open_password_reset_page(user)
+        reset_password(password: new_password, password_confirmation: 'incorrect_password')
 
         expect(page).to to_have_text("Password confirmation doesn't match Password")
       end
@@ -72,10 +52,7 @@ RSpec.describe 'User resets their password', type: :system do
 
     context 'when the email does not exist' do
       it "shows a 'user doesn't exist' error" do
-        visit '/login'
-        click_link 'forget password'
-        fill_in 'Email', with: 'new_user@example.com'
-        click_button 'Submit'
+        forget_password('incorrect@example.com')
 
         expect(page).to to_have_text("User doesn't exist")
       end
