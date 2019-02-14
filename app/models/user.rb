@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :password_reset_token
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   before_create { email.downcase! }
@@ -13,5 +15,20 @@ class User < ApplicationRecord
 
   def logged_in?
     true
+  end
+
+  def create_password_reset_digest
+    self.password_reset_token = User.new_token
+    update_attribute(:password_reset_digest, User.digest(password_reset_token))
+    update_attribute(:password_reset_sent_at, Time.zone.now)
+  end
+
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
   end
 end
