@@ -41,12 +41,28 @@ RSpec.describe 'User resets their password', type: :system do
       it "show a 'password doesn't math' error if passwords does't match" do
         user = create(:user)
         new_password = 'new_password'
+      context 'when token and email does not match in the link' do
+        it 'redirects to login page if token is incorrect' do
+          user = create(:user)
+
+          forget_password(user.email)
+          open_password_reset_page(user, token: 'wrong_token')
+
+          expect(page).to have_current_path(login_path)
+        end
+
+        it 'redirects to login page if email is incorrect' do
+          user = create(:user)
 
         forget_password(user.email)
         open_password_reset_page(user)
         reset_password(password: new_password, password_confirmation: 'incorrect_password')
+          forget_password(user.email)
+          open_password_reset_page(user, email: 'wrong_email@example.com')
 
         expect(page).to to_have_text("Password confirmation doesn't match Password")
+          expect(page).to have_current_path(login_path)
+        end
       end
     end
 
