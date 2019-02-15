@@ -9,7 +9,6 @@ RSpec.describe 'User resets their password', type: :system do
       allow(User).to receive(:new_token).and_return(token)
 
       forget_password(user.email)
-      user.reload
       visit edit_password_reset_path(token, email: user.email)
       reset_password(new_password)
       user.reload
