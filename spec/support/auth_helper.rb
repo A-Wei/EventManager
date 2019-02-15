@@ -17,13 +17,9 @@ module AuthHelper
     click_button 'Submit'
   end
 
-  def open_password_reset_page(user, token = user.password_reset_token, email = user.email)
-    visit edit_password_reset_path(token, email: email)
-  end
-
   def reset_password(password, password_confirmation = password)
     fill_in 'Password', with: password, id: 'user_password'
-    fill_in 'Password confirmation', with: password_confirmation, id: 'user_password_comfirmation'
+    fill_in 'Password confirmation', with: password_confirmation, id: 'user_password_confirmation'
     click_button 'Update'
   end
 end
