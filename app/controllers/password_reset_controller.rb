@@ -50,7 +50,7 @@ class PasswordResetController < ApplicationController
 
   def check_expiration
     if @user.password_reset_expired?
-      flash[:error] = "Password reset has expired."
+      flash[:error] = 'Password reset has expired.'
       redirect_to new_password_reset_url
     end
   end
