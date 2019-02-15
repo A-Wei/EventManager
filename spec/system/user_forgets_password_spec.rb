@@ -16,7 +16,7 @@ RSpec.describe 'User forgets their password', type: :system do
       it "shows a 'user doesn't exist' error" do
         forget_password('incorrect@example.com')
 
-        expect(page).to have_text("User doesn't exist")
+        expect(page).to have_text('Check your email')
       end
     end
   end

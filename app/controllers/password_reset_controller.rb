@@ -7,11 +7,9 @@ class PasswordResetController < ApplicationController
 
     if @user
       @user.create_password_reset_digest
-      render 'show'
-    else
-      flash[:error] = "User doesn't exist"
-      render 'new'
     end
+
+    render 'show'
   end
 
   def show
