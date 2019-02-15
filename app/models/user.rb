@@ -39,4 +39,8 @@ class User < ApplicationRecord
   def authenticated?(digest, token)
     BCrypt::Password.new(digest).is_password?(token)
   end
+
+  def password_reset_expired?
+    password_reset_sent_at < 30.minutes.ago
+  end
 end
