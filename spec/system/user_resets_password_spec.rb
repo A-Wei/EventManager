@@ -70,7 +70,7 @@ RSpec.describe 'User resets their password', type: :system do
       forget_password(user.email)
       visit edit_password_reset_path(wrong_token, email: user.email)
 
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(login_path)
     end
 
     it 'redirects to login page if email is incorrect' do
@@ -82,7 +82,7 @@ RSpec.describe 'User resets their password', type: :system do
       forget_password(user.email)
       visit edit_password_reset_path(token, email: wrong_email)
 
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(login_path)
     end
   end
 end

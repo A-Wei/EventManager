@@ -44,7 +44,7 @@ class PasswordResetController < ApplicationController
 
   def validate_user
     if !(@user && @user.authenticated?(@user.password_reset_digest, params[:id]))
-      redirect_to root_url
+      redirect_to login_path
     end
   end
 
