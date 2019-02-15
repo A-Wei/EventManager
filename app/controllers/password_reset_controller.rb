@@ -1,4 +1,6 @@
 class PasswordResetController < ApplicationController
+  before_action :get_user, only: [:edit, :update]
+
   def new
   end
 
@@ -17,12 +19,9 @@ class PasswordResetController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(email: params[:email])
   end
 
   def update
-    @user = User.find_by(email: params[:email])
-
     if @user.update_attributes(user_params)
       flash[:success] = 'Password has been reset.'
       redirect_to login_path
@@ -35,5 +34,9 @@ class PasswordResetController < ApplicationController
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def get_user
+    @user = User.find_by(email: params[:email])
   end
 end
