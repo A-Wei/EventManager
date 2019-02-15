@@ -1,5 +1,5 @@
 class PasswordResetController < ApplicationController
-  before_action :get_user, only: [:edit, :update]
+  before_action :find_user, only: [:edit, :update]
   before_action :validate_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
@@ -38,7 +38,7 @@ class PasswordResetController < ApplicationController
     params.require(:user).permit(:password, :password_confirmation)
   end
 
-  def get_user
+  def find_user
     @user = User.find_by(email: params[:email])
   end
 
