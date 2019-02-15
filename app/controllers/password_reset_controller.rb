@@ -28,7 +28,7 @@ class PasswordResetController < ApplicationController
       flash[:success] = 'Password has been reset.'
       redirect_to login_path
     else
-      rendern 'edit'
+      redirect_to edit_password_reset_url
     end
   end
 
