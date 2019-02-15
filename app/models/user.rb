@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_later
   end
+
+  def authenticated?(digest, token)
+    BCrypt::Password.new(digest).is_password?(token)
+  end
 end

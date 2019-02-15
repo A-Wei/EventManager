@@ -1,5 +1,6 @@
 class PasswordResetController < ApplicationController
   before_action :get_user, only: [:edit, :update]
+  before_action :validate_user, only: [:edit, :update]
 
   def new
   end
@@ -38,5 +39,11 @@ class PasswordResetController < ApplicationController
 
   def get_user
     @user = User.find_by(email: params[:email])
+  end
+
+  def validate_user
+    if !(@user && @user.authenticated?(@user.password_reset_digest, params[:id]))
+      redirect_to root_url
+    end
   end
 end
