@@ -5,10 +5,14 @@ RSpec.describe 'User resets their password', type: :system do
     it 'resets user password and redirects to login page if the new password is valid' do
       user = create(:user)
       new_password = 'new_password'
+      token = 'user_reset_token'
+      allow(User).to receive(:new_token).and_return(token)
 
       forget_password(user.email)
-      open_password_reset_page(user)
-      reset_password(user)
+      user.reload
+      visit edit_password_reset_path(token, email: user.email)
+      reset_password(new_password)
+      user.reload
 
       authenticated_user = user.authenticate(new_password)
       expect(authenticated_user).to eq(user)
