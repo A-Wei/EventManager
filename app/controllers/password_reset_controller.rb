@@ -7,6 +7,7 @@ class PasswordResetController < ApplicationController
 
     if @user
       @user.create_password_reset_digest
+      @user.send_password_reset_email
     end
 
     render 'show'
