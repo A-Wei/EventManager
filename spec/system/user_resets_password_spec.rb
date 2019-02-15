@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActiveSupport::Testing::TimeHelpers
 
 RSpec.describe 'User resets their password', type: :system do
   context 'when token and email address are correct in the url' do
@@ -16,6 +17,20 @@ RSpec.describe 'User resets their password', type: :system do
       authenticated_user = user.authenticate(new_password)
       expect(authenticated_user).to eq(user)
       expect(page).to have_current_path(login_path)
+    end
+
+    it "shows 'Password reset has expired.' and redirects to new_password_reset_path" do
+      user = create(:user)
+      token = 'user_reset_token'
+      allow(User).to receive(:new_token).and_return(token)
+
+      travel_to(1.hour.ago) do
+        forget_password(user.email)
+      end
+      visit edit_password_reset_path(token, email: user.email)
+
+      expect(page).to have_current_path(new_password_reset_path)
+      expect(page).to have_text('Password reset has expired.')
     end
 
     context 'when the new password is incorrect' do
