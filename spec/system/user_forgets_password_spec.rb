@@ -9,6 +9,7 @@ RSpec.describe 'User forgets their password', type: :system do
         forget_password(user.email)
 
         expect(page).to have_text('Check your email')
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
       end
     end
 
@@ -17,6 +18,7 @@ RSpec.describe 'User forgets their password', type: :system do
         forget_password('incorrect@example.com')
 
         expect(page).to have_text('Check your email')
+        expect(ActionMailer::Base.deliveries.count).to eq(0)
       end
     end
   end
