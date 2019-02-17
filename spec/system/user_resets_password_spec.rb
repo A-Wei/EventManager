@@ -1,5 +1,4 @@
 require 'rails_helper'
-include ActiveSupport::Testing::TimeHelpers
 
 RSpec.describe 'User resets their password', type: :system do
   context 'when token and email address are correct in the url' do
@@ -44,7 +43,7 @@ RSpec.describe 'User resets their password', type: :system do
         visit edit_password_reset_path(token, email: user.email)
         reset_password(new_password)
 
-        expect(page).to have_text("Password can't be blank")
+        expect(page).to have_text('Invalid password')
       end
 
       it "show a 'password too short' error" do
@@ -57,7 +56,7 @@ RSpec.describe 'User resets their password', type: :system do
         visit edit_password_reset_path(token, email: user.email)
         reset_password(new_password)
 
-        expect(page).to have_text('Password is too short')
+        expect(page).to have_text('Invalid password')
       end
 
       it "show a 'password doesn't math' error" do
@@ -68,9 +67,9 @@ RSpec.describe 'User resets their password', type: :system do
 
         forget_password(user.email)
         visit edit_password_reset_path(token, email: user.email)
-        reset_password(password: new_password, password_confirmation: 'incorrect_password')
+        reset_password(new_password, 'incorrect_password')
 
-        expect(page).to have_text("Password confirmation doesn't match Password")
+        expect(page).to have_text('Invalid password')
       end
     end
   end

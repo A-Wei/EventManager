@@ -24,11 +24,13 @@ class PasswordResetController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if incorrect_password?
+      flash[:error] = 'Invalid password, minimum 6 characters and password_confirmation must match'
+      redirect_to edit_password_reset_url
+    else
+      @user.update_attributes(user_params)
       flash[:success] = 'Password has been reset.'
       redirect_to login_path
-    else
-      redirect_to edit_password_reset_url
     end
   end
 
@@ -53,5 +55,21 @@ class PasswordResetController < ApplicationController
       flash[:error] = 'Password reset has expired.'
       redirect_to new_password_reset_url
     end
+  end
+
+  def incorrect_password?
+    blank_password? || short_password? || not_match_password?
+  end
+
+  def blank_password?
+    user_params[:password].blank?
+  end
+
+  def short_password?
+    user_params[:password].length < 6
+  end
+
+  def not_match_password?
+    user_params[:password] != user_params[:password_confirmation]
   end
 end
