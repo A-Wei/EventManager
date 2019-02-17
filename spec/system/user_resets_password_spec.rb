@@ -44,6 +44,7 @@ RSpec.describe 'User resets their password', type: :system do
         reset_password(new_password)
 
         expect(page).to have_text('Invalid password')
+        expect(page).to have_text('Reset Password')
       end
 
       it "show a 'password too short' error" do
@@ -57,6 +58,7 @@ RSpec.describe 'User resets their password', type: :system do
         reset_password(new_password)
 
         expect(page).to have_text('Invalid password')
+        expect(page).to have_text('Reset Password')
       end
 
       it "show a 'password doesn't math' error" do
@@ -70,6 +72,7 @@ RSpec.describe 'User resets their password', type: :system do
         reset_password(new_password, 'incorrect_password')
 
         expect(page).to have_text('Invalid password')
+        expect(page).to have_text('Reset Password')
       end
     end
   end
