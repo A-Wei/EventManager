@@ -13,7 +13,7 @@ class ResetPasswordController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: email_params)
+    user = User.find_by(reset_password_params)
 
     if user
       user.create_reset_password_digest
@@ -36,8 +36,8 @@ class ResetPasswordController < ApplicationController
 
   private
 
-  def email_params
-    params[:reset_password][:email]
+  def reset_password_params
+    params.require(:reset_password).permit(:email)
   end
 
   def user_params
