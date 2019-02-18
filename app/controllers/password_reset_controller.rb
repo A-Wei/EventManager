@@ -25,7 +25,7 @@ class PasswordResetController < ApplicationController
 
   def update
     if incorrect_password?
-      flash[:error] = 'Invalid password, minimum 6 characters and password_confirmation must match'
+      flash[:error] = 'Invalid password, minimum 6 characters and password confirmation must match'
       redirect_to request.referrer
     else
       @user.update_attributes(user_params)
