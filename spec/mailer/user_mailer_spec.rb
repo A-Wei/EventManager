@@ -4,7 +4,7 @@ RSpec.describe UserMailer, type: :mailer do
   describe '#password_reset' do
     it 'sends the password_reset mailer to the submitted email' do
       user = create(:user)
-      user.password_reset_token = User.new_token
+      user.password_reset_token = 'test_token'
 
       mail = UserMailer.password_reset(user).deliver_now
 

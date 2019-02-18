@@ -18,13 +18,9 @@ class User < ApplicationRecord
   end
 
   def create_password_reset_digest
-    self.password_reset_token = User.new_token
+    self.password_reset_token = Token.generate
     update_attribute(:password_reset_digest, User.digest(password_reset_token))
     update_attribute(:password_reset_sent_at, Time.zone.now)
-  end
-
-  def self.new_token
-    SecureRandom.urlsafe_base64
   end
 
   def self.digest(string)

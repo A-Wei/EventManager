@@ -6,7 +6,7 @@ RSpec.describe 'User resets their password', type: :system do
       user = create(:user)
       new_password = 'new_password'
       token = 'user_reset_token'
-      allow(User).to receive(:new_token).and_return(token)
+      allow(Token).to receive(:generate).and_return(token)
 
       forget_password(user.email)
       visit edit_password_reset_path(token, email: user.email)
@@ -22,7 +22,7 @@ RSpec.describe 'User resets their password', type: :system do
       it 'shows an error and redirects to new_password_reset_path' do
         user = create(:user)
         token = 'user_reset_token'
-        allow(User).to receive(:new_token).and_return(token)
+        allow(Token).to receive(:generate).and_return(token)
 
         travel_to(1.hour.ago) do
           forget_password(user.email)
@@ -39,7 +39,7 @@ RSpec.describe 'User resets their password', type: :system do
         user = create(:user)
         new_password = ''
         token = 'user_reset_token'
-        allow(User).to receive(:new_token).and_return(token)
+        allow(Token).to receive(:generate).and_return(token)
 
         forget_password(user.email)
         visit edit_password_reset_path(token, email: user.email)
@@ -53,7 +53,7 @@ RSpec.describe 'User resets their password', type: :system do
         user = create(:user)
         new_password = '12345'
         token = 'user_reset_token'
-        allow(User).to receive(:new_token).and_return(token)
+        allow(Token).to receive(:generate).and_return(token)
 
         forget_password(user.email)
         visit edit_password_reset_path(token, email: user.email)
@@ -67,7 +67,7 @@ RSpec.describe 'User resets their password', type: :system do
         user = create(:user)
         new_password = '123456'
         token = 'user_reset_token'
-        allow(User).to receive(:new_token).and_return(token)
+        allow(Token).to receive(:generate).and_return(token)
 
         forget_password(user.email)
         visit edit_password_reset_path(token, email: user.email)
@@ -84,7 +84,7 @@ RSpec.describe 'User resets their password', type: :system do
       user = create(:user)
       token = 'user_reset_token'
       wrong_token = 'wrong_token'
-      allow(User).to receive(:new_token).and_return(token)
+      allow(Token).to receive(:generate).and_return(token)
 
       forget_password(user.email)
       visit edit_password_reset_path(wrong_token, email: user.email)
@@ -96,7 +96,7 @@ RSpec.describe 'User resets their password', type: :system do
       user = create(:user)
       token = 'user_reset_token'
       wrong_email = 'incorrect@example.com'
-      allow(User).to receive(:new_token).and_return(token)
+      allow(Token).to receive(:generate).and_return(token)
 
       forget_password(user.email)
       visit edit_password_reset_path(token, email: wrong_email)
