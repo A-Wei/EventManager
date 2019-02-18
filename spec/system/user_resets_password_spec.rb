@@ -9,7 +9,7 @@ RSpec.describe 'User resets their password', type: :system do
       allow(Token).to receive(:generate).and_return(token)
 
       forget_password(user.email)
-      visit edit_password_reset_path(token, email: user.email)
+      visit edit_reset_password_path(token, email: user.email)
       reset_password(new_password)
       user.reload
 
@@ -19,7 +19,7 @@ RSpec.describe 'User resets their password', type: :system do
     end
 
     context 'when the token has expired' do
-      it 'shows an error and redirects to new_password_reset_path' do
+      it 'shows an error and redirects to new_reset_password_path' do
         user = create(:user)
         token = 'user_reset_token'
         allow(Token).to receive(:generate).and_return(token)
@@ -27,9 +27,9 @@ RSpec.describe 'User resets their password', type: :system do
         travel_to(1.hour.ago) do
           forget_password(user.email)
         end
-        visit edit_password_reset_path(token, email: user.email)
+        visit edit_reset_password_path(token, email: user.email)
 
-        expect(page).to have_current_path(new_password_reset_path)
+        expect(page).to have_current_path(new_reset_password_path)
         expect(page).to have_text('Password reset has expired.')
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe 'User resets their password', type: :system do
         allow(Token).to receive(:generate).and_return(token)
 
         forget_password(user.email)
-        visit edit_password_reset_path(token, email: user.email)
+        visit edit_reset_password_path(token, email: user.email)
         reset_password(new_password)
 
         expect(page).to have_text('Invalid password')
@@ -56,7 +56,7 @@ RSpec.describe 'User resets their password', type: :system do
         allow(Token).to receive(:generate).and_return(token)
 
         forget_password(user.email)
-        visit edit_password_reset_path(token, email: user.email)
+        visit edit_reset_password_path(token, email: user.email)
         reset_password(new_password)
 
         expect(page).to have_text('Invalid password')
@@ -70,7 +70,7 @@ RSpec.describe 'User resets their password', type: :system do
         allow(Token).to receive(:generate).and_return(token)
 
         forget_password(user.email)
-        visit edit_password_reset_path(token, email: user.email)
+        visit edit_reset_password_path(token, email: user.email)
         reset_password(new_password, 'incorrect_password')
 
         expect(page).to have_text('Invalid password')
@@ -87,7 +87,7 @@ RSpec.describe 'User resets their password', type: :system do
       allow(Token).to receive(:generate).and_return(token)
 
       forget_password(user.email)
-      visit edit_password_reset_path(wrong_token, email: user.email)
+      visit edit_reset_password_path(wrong_token, email: user.email)
 
       expect(page).to have_current_path(login_path)
     end
@@ -99,7 +99,7 @@ RSpec.describe 'User resets their password', type: :system do
       allow(Token).to receive(:generate).and_return(token)
 
       forget_password(user.email)
-      visit edit_password_reset_path(token, email: wrong_email)
+      visit edit_reset_password_path(token, email: wrong_email)
 
       expect(page).to have_current_path(login_path)
     end

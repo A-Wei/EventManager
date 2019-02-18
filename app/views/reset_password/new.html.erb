@@ -3,7 +3,7 @@
     <div class='columns is-centered'>
       <div class='column is-4'>
         <h2 class='title is-2'>Forget Password</h2>
-        <%= simple_form_for(:password_reset, url: password_reset_index_path) do |f| %>
+        <%= simple_form_for(:reset_password, url: reset_password_index_path) do |f| %>
           <div class='field'>
             <strong>
               <%= f.input :email, required: true, error: false, input_html: { class: 'input' } %>

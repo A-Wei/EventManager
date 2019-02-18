@@ -1,4 +1,4 @@
-class PasswordResetController < ApplicationController
+class ResetPasswordController < ApplicationController
   before_action :find_user, only: [:edit, :update]
   before_action :validate_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
@@ -16,8 +16,8 @@ class PasswordResetController < ApplicationController
     user = User.find_by(email: email_params)
 
     if user
-      user.create_password_reset_digest
-      UserMailer.password_reset(user).deliver_now
+      user.create_reset_password_digest
+      UserMailer.reset_password(user).deliver_now
     end
 
     render 'show'
@@ -37,7 +37,7 @@ class PasswordResetController < ApplicationController
   private
 
   def email_params
-    params[:password_reset][:email]
+    params[:reset_password][:email]
   end
 
   def user_params
@@ -49,15 +49,15 @@ class PasswordResetController < ApplicationController
   end
 
   def validate_user
-    if !(@user && @user.authenticated?(@user.password_reset_digest, params[:id]))
+    if !(@user && @user.authenticated?(@user.reset_password_digest, params[:id]))
       redirect_to login_path
     end
   end
 
   def check_expiration
-    if @user.password_reset_expired?
+    if @user.reset_password_expired?
       flash[:error] = 'Password reset has expired.'
-      redirect_to new_password_reset_url
+      redirect_to new_reset_password_url
     end
   end
 end

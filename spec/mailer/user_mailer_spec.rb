@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe UserMailer, type: :mailer do
-  describe '#password_reset' do
-    it 'sends the password_reset mailer to the submitted email' do
+  describe '#reset_password' do
+    it 'sends the reset_password mailer to the submitted email' do
       user = create(:user)
-      user.password_reset_token = 'test_token'
+      user.reset_password_token = 'test_token'
 
-      mail = UserMailer.password_reset(user).deliver_now
+      mail = UserMailer.reset_password(user).deliver_now
 
       expect(mail.to).to eq([user.email])
-      expect(mail.body.encoded).to match(user.password_reset_token)
+      expect(mail.body.encoded).to match(user.reset_password_token)
     end
   end
 end

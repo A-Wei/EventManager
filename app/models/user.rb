@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :password_reset_token
+  attr_accessor :reset_password_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
@@ -17,21 +17,21 @@ class User < ApplicationRecord
     true
   end
 
-  def create_password_reset_digest
-    self.password_reset_token = Token.generate
-    update_column(:password_reset_digest, digested_token)
-    update_column(:password_reset_sent_at, Time.zone.now)
+  def create_reset_password_digest
+    self.reset_password_token = Token.generate
+    update_column(:reset_password_digest, digested_token)
+    update_column(:reset_password_sent_at, Time.zone.now)
   end
 
   def authenticated?(digest, token)
     BCrypt::Password.new(digest).is_password?(token)
   end
 
-  def password_reset_expired?
-    password_reset_sent_at < 30.minutes.ago
+  def reset_password_expired?
+    reset_password_sent_at < 30.minutes.ago
   end
 
   def digested_token
-    DigestToken.generate(string: password_reset_token)
+    DigestToken.generate(string: reset_password_token)
   end
 end
