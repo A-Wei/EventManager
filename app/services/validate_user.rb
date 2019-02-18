@@ -1,8 +1,4 @@
 class ValidateUser
-  def self.call(*args)
-    new(*args).call
-  end
-
   def initialize(user:, id:)
     @user = user
     @id = id
