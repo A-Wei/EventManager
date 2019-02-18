@@ -19,13 +19,8 @@ class User < ApplicationRecord
 
   def create_password_reset_digest
     self.password_reset_token = Token.generate
-    update_attribute(:password_reset_digest, User.digest(password_reset_token))
+    update_attribute(:password_reset_digest, digested_token)
     update_attribute(:password_reset_sent_at, Time.zone.now)
-  end
-
-  def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
   end
 
   def authenticated?(digest, token)
@@ -34,5 +29,9 @@ class User < ApplicationRecord
 
   def password_reset_expired?
     password_reset_sent_at < 30.minutes.ago
+  end
+
+  def digested_token
+    DigestToken.generate(string: password_reset_token)
   end
 end
