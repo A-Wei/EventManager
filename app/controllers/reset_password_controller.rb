@@ -25,7 +25,7 @@ class ResetPasswordController < ApplicationController
 
   def update
     if Password.new(user_params).valid?
-      @user.update_attributes(user_params)
+      user.update_attributes(user_params)
       flash[:success] = 'Password has been reset.'
       redirect_to login_path
     else
@@ -33,6 +33,8 @@ class ResetPasswordController < ApplicationController
       redirect_to request.referrer
     end
   end
+
+  attr_reader :user
 
   private
 
@@ -49,13 +51,13 @@ class ResetPasswordController < ApplicationController
   end
 
   def validate_user
-    if !(@user && @user.authenticated?(@user.reset_password_digest, params[:id]))
+    if !(user && user.authenticated?(user.reset_password_digest, params[:id]))
       redirect_to login_path
     end
   end
 
   def check_expiration
-    if @user.reset_password_expired?
+    if user.reset_password_expired?
       flash[:error] = 'Password reset has expired.'
       redirect_to new_reset_password_url
     end
