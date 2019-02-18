@@ -18,22 +18,24 @@ RSpec.describe 'User resets their password', type: :system do
       expect(page).to have_current_path(login_path)
     end
 
-    it "shows 'Password reset has expired.' and redirects to new_password_reset_path" do
-      user = create(:user)
-      token = 'user_reset_token'
-      allow(User).to receive(:new_token).and_return(token)
+    context 'when the token has expired' do
+      it 'shows an error and redirects to new_password_reset_path' do
+        user = create(:user)
+        token = 'user_reset_token'
+        allow(User).to receive(:new_token).and_return(token)
 
-      travel_to(1.hour.ago) do
-        forget_password(user.email)
+        travel_to(1.hour.ago) do
+          forget_password(user.email)
+        end
+        visit edit_password_reset_path(token, email: user.email)
+
+        expect(page).to have_current_path(new_password_reset_path)
+        expect(page).to have_text('Password reset has expired.')
       end
-      visit edit_password_reset_path(token, email: user.email)
-
-      expect(page).to have_current_path(new_password_reset_path)
-      expect(page).to have_text('Password reset has expired.')
     end
 
     context 'when the new password is incorrect' do
-      it "show a 'password can't be blank' error" do
+      it 'show an error message if password is blank' do
         user = create(:user)
         new_password = ''
         token = 'user_reset_token'
@@ -47,7 +49,7 @@ RSpec.describe 'User resets their password', type: :system do
         expect(page).to have_text('Reset Password')
       end
 
-      it "show a 'password too short' error" do
+      it 'show an error message if password is less than 6 characters' do
         user = create(:user)
         new_password = '12345'
         token = 'user_reset_token'
@@ -61,7 +63,7 @@ RSpec.describe 'User resets their password', type: :system do
         expect(page).to have_text('Reset Password')
       end
 
-      it "show a 'password doesn't math' error" do
+      it 'show an error message if password_confirmation does not match password' do
         user = create(:user)
         new_password = '123456'
         token = 'user_reset_token'
