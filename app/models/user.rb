@@ -19,8 +19,8 @@ class User < ApplicationRecord
 
   def create_password_reset_digest
     self.password_reset_token = Token.generate
-    update_attribute(:password_reset_digest, digested_token)
-    update_attribute(:password_reset_sent_at, Time.zone.now)
+    update_column(:password_reset_digest, digested_token)
+    update_column(:password_reset_sent_at, Time.zone.now)
   end
 
   def authenticated?(digest, token)
