@@ -1,8 +1,6 @@
 class ResetPasswordController < ApplicationController
   before_action :find_user, only: [:edit, :update]
-  before_action :validate_request, only: [:edit, :update]
-  # before_action :validate_user, only: [:edit, :update]
-  # before_action :check_expiration, only: [:edit, :update]
+  before_action :validate_user, only: [:edit, :update]
 
   def show
   end
@@ -51,20 +49,14 @@ class ResetPasswordController < ApplicationController
     @user = User.find_by(email: params[:email])
   end
 
-  def validate_request
-    ValidateRequest.call(user: user, id: params[:id])
+  def validate_user
+    result = ValidateUser.new(user: user, id: params[:id])
+
+    if result.not_authenticated?
+      redirect_to login_path
+    elsif result.expired?
+      flash[:error] = 'Password reset has expired.'
+      redirect_to new_reset_password_url
+    end
   end
-
-  # def validate_user
-  #   if !(user && user.authenticated?(user.reset_password_digest, params[:id]))
-  #     redirect_to login_path
-  #   end
-  # end
-
-  # def check_expiration
-  #   if user.reset_password_expired?
-  #     flash[:error] = 'Password reset has expired.'
-  #     redirect_to new_reset_password_url
-  #   end
-  # end
 end
