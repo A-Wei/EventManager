@@ -3,24 +3,24 @@ class PasswordResetController < ApplicationController
   before_action :validate_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
-  def new
-  end
-
-  def create
-    @user = User.find_by(email: params[:password_reset][:email])
-
-    if @user
-      @user.create_password_reset_digest
-      UserMailer.password_reset(@user).deliver_now
-    end
-
-    render 'show'
-  end
-
   def show
   end
 
+  def new
+  end
+
   def edit
+  end
+
+  def create
+    user = User.find_by(email: email_params)
+
+    if user
+      user.create_password_reset_digest
+      UserMailer.password_reset(user).deliver_now
+    end
+
+    render 'show'
   end
 
   def update
@@ -35,6 +35,10 @@ class PasswordResetController < ApplicationController
   end
 
   private
+
+  def email_params
+    params[:password_reset][:email]
+  end
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)
