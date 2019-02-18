@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  MINUTES_UNTIL_EXPIRATION = 30
+
   attr_accessor :reset_password_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
@@ -28,7 +30,11 @@ class User < ApplicationRecord
   end
 
   def reset_password_expired?
-    reset_password_sent_at < 30.minutes.ago
+    reset_password_sent_at < MINUTES_UNTIL_EXPIRATION.minutes.ago
+  end
+
+  def token_expires_in?
+    time_ago_in_words(MINUTES_UNTIL_EXPIRATION.minutes.from_now)
   end
 
   def digested_token
