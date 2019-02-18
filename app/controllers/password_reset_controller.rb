@@ -24,7 +24,7 @@ class PasswordResetController < ApplicationController
   end
 
   def update
-    if ValidatePassword.call(user_params)
+    if Password.new(user_params).valid?
       @user.update_attributes(user_params)
       flash[:success] = 'Password has been reset.'
       redirect_to login_path
