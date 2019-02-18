@@ -32,10 +32,6 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
-  end
-
   def authenticated?(digest, token)
     BCrypt::Password.new(digest).is_password?(token)
   end

@@ -11,7 +11,7 @@ class PasswordResetController < ApplicationController
 
     if @user
       @user.create_password_reset_digest
-      @user.send_password_reset_email
+      UserMailer.password_reset(@user).deliver_now
     end
 
     render 'show'
