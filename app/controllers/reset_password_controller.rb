@@ -50,7 +50,7 @@ class ResetPasswordController < ApplicationController
   end
 
   def validate_user
-    result = ValidateUser.new(user: user, id: params[:id])
+    result = ValidateUser.call(user: user, id: params[:id])
 
     if result.not_authenticated?
       redirect_to login_path
