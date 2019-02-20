@@ -37,6 +37,8 @@ class User < ApplicationRecord
     time_ago_in_words(MINUTES_UNTIL_EXPIRATION.minutes.from_now)
   end
 
+  private
+
   def digested_token
     DigestToken.generate(string: reset_password_token)
   end
