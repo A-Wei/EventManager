@@ -99,14 +99,4 @@ RSpec.describe User, type: :model do
       expect(result).to eq(true)
     end
   end
-
-  describe '#token_expires_in?' do
-    it 'returns 30 minutes' do
-      user = create(:user)
-
-      result = user.token_expires_in?
-
-      expect(result).to eq('30 minutes')
-    end
-  end
 end

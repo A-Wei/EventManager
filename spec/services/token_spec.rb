@@ -9,4 +9,20 @@ RSpec.describe Token do
       expect(token.length).to eq(22)
     end
   end
+
+  describe '#token_valids_for_in_words' do
+    it 'returns "30 minutes"' do
+      result = Token.new.token_valids_for_in_words
+
+      expect(result).to eq('30 minutes')
+    end
+  end
+
+  describe '#valid_time' do
+    it 'returns 30' do
+      result = Token.new.valid_time
+
+      expect(result).to eq(30)
+    end
+  end
 end
