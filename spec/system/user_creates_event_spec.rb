@@ -1,5 +1,4 @@
 require 'rails_helper'
-include ActiveSupport::Testing::TimeHelpers
 
 RSpec.describe 'User creates event', type: :system do
   context 'when logged in user clicks "create event" button on home page' do
@@ -96,7 +95,7 @@ RSpec.describe 'User creates event', type: :system do
         click_button 'Create'
 
         expect(page).to have_current_path(new_event_path)
-        expect(page).to have_text("Start time invalid")
+        expect(page).to have_text('Start time invalid')
       end
 
       it "shows 'End time is earlier than start time' error" do
