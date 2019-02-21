@@ -117,7 +117,7 @@ RSpec.describe 'User creates event', type: :system do
         expect(page).to have_text('End time is earlier than start time')
       end
 
-      it 'shows "start time or end time formate is incorrect, please try again"' do
+      it 'shows "start time or end time format is incorrect, please try again"' do
         user = create(:user)
         start_time = '03/31/2019 06:30'
         end_time = '03/31/2019 07:30'
@@ -133,7 +133,7 @@ RSpec.describe 'User creates event', type: :system do
         click_button 'Create'
 
         expect(page).to have_current_path(new_event_path)
-        expect(page).to have_text('formate is incorrect')
+        expect(page).to have_text('format is incorrect')
       end
     end
   end
