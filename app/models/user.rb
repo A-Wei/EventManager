@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
 
   def reset_password_expired?
-    reset_password_sent_at < token_expires_at
+    token_expires_at > reset_password_sent_at
   end
 
   private
