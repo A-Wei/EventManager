@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def logged_in_user
     if !current_user.logged_in?
-      flash[:danger] = 'Please log in.'
+      flash[:error] = 'Please log in.'
       redirect_to login_url
     end
   end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user != current_user
-      flash[:danger] = 'Not authorized.'
+      flash[:error] = 'Not authorized.'
       redirect_to root_url
     end
   end

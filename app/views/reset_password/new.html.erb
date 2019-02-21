@@ -1,0 +1,17 @@
+<section class='section'>
+  <container class='container'>
+    <div class='columns is-centered'>
+      <div class='column is-4'>
+        <h2 class='title is-2'>Forget Password</h2>
+        <%= simple_form_for(:reset_password, url: reset_password_index_path) do |f| %>
+          <div class='field'>
+            <strong>
+              <%= f.input :email, required: true, error: false, input_html: { class: 'input' } %>
+            </strong>
+          </div>
+          <%= f.button :submit, 'Submit', class: 'button is-outlined is-medium is-primary' %>
+        <% end %>
+      </div>
+    </div>
+  <container class='container'>
+</section>

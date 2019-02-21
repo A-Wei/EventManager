@@ -26,9 +26,10 @@
       </div>
     </nav>
     <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
+      <div class='notification has-text-danger has-text-centered'>
+        <strong><%= content_tag :div, msg, class: name %></strong>
+      </div>
     <% end -%>
-
     <%= yield %>
   </body>
 </html>
