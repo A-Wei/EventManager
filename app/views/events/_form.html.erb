@@ -1,0 +1,36 @@
+<%= simple_form_for(@event, url: events_path) do |f| %>
+  <div class='field'>
+    <strong>
+      <%= f.input :title, required: true, error: true, input_html: { class: 'input' } %>
+      <%=
+        f.input(
+          :start_at,
+          as: :datetime,
+          html5: true,
+          required: true,
+          error: false,
+          input_html: {
+            class: 'input',
+            type: 'datetime-local',
+          }
+        )
+      %>
+      <%=
+        f.input(
+          :end_at,
+          as: :datetime,
+          html5: true,
+          required: true,
+          error: false,
+          input_html: {
+            class: 'input',
+            type: 'datetime-local',
+          }
+        )
+      %>
+      <%= f.input :location, required: true, error: false, input_html: { class: 'input' } %>
+      <%= f.input :description, required: true, error: false, input_html: { class: 'textarea' } %>
+    </strong>
+  </div>
+  <%= f.button :submit, 'Create', class: 'button is-outlined is-medium is-primary' %>
+<% end %>
