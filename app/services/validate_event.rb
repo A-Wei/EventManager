@@ -36,14 +36,6 @@ class ValidateEvent
       @event_end_time = params[:end_time]
     end
 
-    def invalid_start_time?
-      Time.zone.now > event_start_time
-    end
-
-    def invalid_end_time?
-      event_end_time < event_start_time
-    end
-
     def invalid_time_format?
       TIME_REGEX !~ event_start_time || TIME_REGEX !~ event_end_time
     end

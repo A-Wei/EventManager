@@ -79,7 +79,7 @@ RSpec.describe 'User creates event', type: :system do
         expect(page).to have_text("Description can't be blank")
       end
 
-      it "shows 'Start time invalid' error if start time earlier than current time" do
+      it "shows 'Start time can't be in the past' error if start time earlier than current time" do
         user = create(:user)
         start_time = 2.hours.ago
         end_time = 1.hour.ago
@@ -95,10 +95,10 @@ RSpec.describe 'User creates event', type: :system do
         click_button 'Create'
 
         expect(page).to have_current_path(new_event_path)
-        expect(page).to have_text('Start time invalid')
+        expect(page).to have_text("Start time can't be in the past")
       end
 
-      it "shows 'End time is earlier than start time' error" do
+      it "shows 'End time can't be earlier then start time' error" do
         user = create(:user)
         start_time = 2.hours.from_now
         end_time = 1.hour.from_now
@@ -114,7 +114,7 @@ RSpec.describe 'User creates event', type: :system do
         click_button 'Create'
 
         expect(page).to have_current_path(new_event_path)
-        expect(page).to have_text('End time is earlier than start time')
+        expect(page).to have_text("End time can't be earlier then start time")
       end
 
       it 'shows "start time or end time format is incorrect, please try again" error' do

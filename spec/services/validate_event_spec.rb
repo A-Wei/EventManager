@@ -11,50 +11,6 @@ RSpec.describe ValidateEvent do
     end
   end
 
-  describe '#invalid_start_time?' do
-    it 'returns true if start_time is in the past' do
-      start_time = 2.hours.ago
-      end_time = 1.hour.ago
-      params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
-
-      result = ValidateEvent.call(params)
-
-      expect(result.invalid_start_time?).to eq(true)
-    end
-
-    it 'returns false if start_time is in the future' do
-      start_time = 1.hour.from_now
-      end_time = 2.hours.from_now
-      params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
-
-      result = ValidateEvent.call(params)
-
-      expect(result.invalid_start_time?).to eq(false)
-    end
-  end
-
-  describe '#invalid_end_time?' do
-    it 'returns true if end_time is earlier than start_time ' do
-      start_time = 2.hours.from_now
-      end_time = 1.hour.from_now
-      params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
-
-      result = ValidateEvent.call(params)
-
-      expect(result.invalid_end_time?).to eq(true)
-    end
-
-    it 'returns false if end_time is later than start_time' do
-      start_time = 1.hour.from_now
-      end_time = 2.hours.from_now
-      params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
-
-      result = ValidateEvent.call(params)
-
-      expect(result.invalid_end_time?).to eq(false)
-    end
-  end
-
   describe '#invalid_time_format?' do
     it 'returns false if start_time and end_time format are both correct' do
       start_time = '2019-02-02 13:30'
