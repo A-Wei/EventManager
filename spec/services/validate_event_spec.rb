@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ValidateEvent do
   describe '.call' do
     it 'returns a "TimeValidator" object' do
-      params = ActionController::Parameters.new()
+      params = ActionController::Parameters.new
 
       object = ValidateEvent.call(params)
 
