@@ -130,7 +130,7 @@ RSpec.describe 'User creates event', type: :system do
 
   context 'when guest visit new_event_path' do
     it 'redirects to login page' do
-      visit '/events/new'
+      visit new_event_path
 
       expect(page).to have_current_path(login_path)
     end
