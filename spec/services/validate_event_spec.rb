@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe ValidateEvent do
   describe '.call' do
     it 'returns a "TimeValidator" object' do
-      start_time = Time.zone.now + 1.hour
-      end_time = Time.zone.now + 2.hours
-      params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
+      params = ActionController::Parameters.new()
 
       object = ValidateEvent.call(params)
 
@@ -35,7 +33,7 @@ RSpec.describe ValidateEvent do
     end
   end
 
-  describe '#valid_end_time?' do
+  describe '#invalid_end_time?' do
     it 'returns true if end_time is earlier than start_time ' do
       start_time = Time.zone.now + 2.hours
       end_time = Time.zone.now + 1.hour
