@@ -50,6 +50,6 @@ class ValidateEvent
 
     private
 
-    attr_reader :params, :event_start_time, :event_end_time
+    attr_reader :event_start_time, :event_end_time
   end
 end
