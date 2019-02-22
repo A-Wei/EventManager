@@ -5,8 +5,8 @@ RSpec.describe 'User creates event', type: :system do
     context 'when event data is correct' do
       it 'creates an event and redirect to event show page' do
         user = create(:user)
-        start_time = Time.now + 1.hour
-        end_time = Time.now + 2.hours
+        start_time = 1.hour.from_now
+        end_time = 2.hours.from_now
 
         login(user)
         visit root_path
@@ -27,8 +27,8 @@ RSpec.describe 'User creates event', type: :system do
     context 'when event data is inccorect' do
       it "shows 'Title can't be blank' error and rerender the page" do
         user = create(:user)
-        start_time = Time.now + 1.hour
-        end_time = Time.now + 2.hours
+        start_time = 1.hour.from_now
+        end_time = 2.hours.from_now
 
         login(user)
         visit root_path
@@ -45,8 +45,8 @@ RSpec.describe 'User creates event', type: :system do
 
       it "shows 'Location can't be blank' error and rerender the page" do
         user = create(:user)
-        start_time = Time.now + 1.hour
-        end_time = Time.now + 2.hours
+        start_time = 1.hour.from_now
+        end_time = 2.hours.from_now
 
         login(user)
         visit root_path
@@ -63,8 +63,8 @@ RSpec.describe 'User creates event', type: :system do
 
       it "shows 'Description can't be blank' error and rerender the page" do
         user = create(:user)
-        start_time = Time.now + 1.hour
-        end_time = Time.now + 2.hours
+        start_time = 1.hour.from_now
+        end_time = 2.hours.from_now
 
         login(user)
         visit root_path
@@ -81,8 +81,8 @@ RSpec.describe 'User creates event', type: :system do
 
       it "shows 'Start time invalid' error if start time earlier than current time" do
         user = create(:user)
-        start_time = Time.now - 2.hours
-        end_time = Time.now - 1.hour
+        start_time = 2.hours.ago
+        end_time = 1.hour.ago
 
         login(user)
         visit root_path
@@ -100,8 +100,8 @@ RSpec.describe 'User creates event', type: :system do
 
       it "shows 'End time is earlier than start time' error" do
         user = create(:user)
-        start_time = Time.now + 2.hours
-        end_time = Time.now + 1.hour
+        start_time = 2.hours.from_now
+        end_time = 1.hour.from_now
 
         login(user)
         visit root_path

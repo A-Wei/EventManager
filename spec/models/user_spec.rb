@@ -82,7 +82,7 @@ RSpec.describe User, type: :model do
 
   describe '#reset_password_expired?' do
     it 'returns false is user.reset_password_sent_at is within 30 minutes' do
-      sent_at = Time.zone.now - 15.minutes
+      sent_at = 15.minutes.ago
       user = create(:user, reset_password_sent_at: sent_at)
 
       result = user.reset_password_expired?
@@ -91,7 +91,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'returns false is user.reset_password_sent_at is more than 30 minutes' do
-      sent_at = Time.zone.now - 1.hour
+      sent_at = 1.hour.ago
       user = create(:user, reset_password_sent_at: sent_at)
 
       result = user.reset_password_expired?

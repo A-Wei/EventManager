@@ -13,8 +13,8 @@ RSpec.describe ValidateEvent do
 
   describe '#invalid_start_time?' do
     it 'returns true if start_time is in the past' do
-      start_time = Time.zone.now - 2.hours
-      end_time = Time.zone.now - 1.hour
+      start_time = 2.hours.ago
+      end_time = 1.hour.ago
       params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
 
       result = ValidateEvent.call(params)
@@ -23,8 +23,8 @@ RSpec.describe ValidateEvent do
     end
 
     it 'returns false if start_time is in the future' do
-      start_time = Time.zone.now + 1.hour
-      end_time = Time.zone.now + 2.hours
+      start_time = 1.hour.from_now
+      end_time = 2.hours.from_now
       params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
 
       result = ValidateEvent.call(params)
@@ -35,8 +35,8 @@ RSpec.describe ValidateEvent do
 
   describe '#invalid_end_time?' do
     it 'returns true if end_time is earlier than start_time ' do
-      start_time = Time.zone.now + 2.hours
-      end_time = Time.zone.now + 1.hour
+      start_time = 2.hours.from_now
+      end_time = 1.hour.from_now
       params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
 
       result = ValidateEvent.call(params)
@@ -45,8 +45,8 @@ RSpec.describe ValidateEvent do
     end
 
     it 'returns false if end_time is later than start_time' do
-      start_time = Time.zone.now + 1.hour
-      end_time = Time.zone.now + 2.hours
+      start_time = 1.hour.from_now
+      end_time = 2.hours.from_now
       params = ActionController::Parameters.new(start_time: start_time, end_time: end_time)
 
       result = ValidateEvent.call(params)
