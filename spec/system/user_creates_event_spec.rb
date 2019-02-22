@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User creates event', type: :system do
   context 'when logged in user clicks "create event" button on home page' do
     context 'when event data is correct' do
-      it 'creates an event and redirect to event home page' do
+      it 'creates an event and redirect to event show page' do
         user = create(:user)
         start_time = Time.now + 1.hour
         end_time = Time.now + 2.hours
@@ -117,7 +117,7 @@ RSpec.describe 'User creates event', type: :system do
         expect(page).to have_text('End time is earlier than start time')
       end
 
-      it 'shows "start time or end time format is incorrect, please try again"' do
+      it 'shows "start time or end time format is incorrect, please try again" error' do
         user = create(:user)
         start_time = '03/31/2019 06:30'
         end_time = '03/31/2019 07:30'
