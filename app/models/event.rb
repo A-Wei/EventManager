@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
-  validates :title, :location, :description, :start_time, :end_time, presence: true
-  validates_with StartTimeInFuture
+  validates :end_time, presence: true, in_future: true
+  validates :start_time, presence: true, in_future: true
+  validates :title, :location, :description, presence: true
+
   validates_with EndTimeLaterThanStartTime
 end

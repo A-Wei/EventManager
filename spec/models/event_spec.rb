@@ -13,6 +13,7 @@ RSpec.describe Event, type: :model do
 
       it { is_expected.to validate_presence_of(:start_time) }
       it { is_expected.to allow_value(Time.zone.now + 10.minutes).for(:start_time) }
+      it { is_expected.not_to allow_value(Time.zone.now - 10.minutes).for(:start_time) }
       it { is_expected.not_to allow_value('some_date').for(:start_time) }
     end
 
@@ -21,6 +22,7 @@ RSpec.describe Event, type: :model do
 
       it { is_expected.to validate_presence_of(:end_time) }
       it { is_expected.to allow_value(Time.zone.now + 3.hours).for(:end_time) }
+      it { is_expected.not_to allow_value(Time.zone.now - 10.minutes).for(:end_time) }
       it { is_expected.not_to allow_value('some_date').for(:end_time) }
     end
 
