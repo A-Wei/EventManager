@@ -5,15 +5,15 @@ RSpec.describe 'User creates event', type: :system do
     context 'when event data is correct' do
       it 'creates an event and redirect to event show page' do
         user = create(:user)
-        start_time = 1.hour.from_now
-        end_time = 2.hours.from_now
+        start_at = 1.hour.from_now
+        end_at = 2.hours.from_now
 
         login(user)
         visit root_path
         click_link 'Create event'
         fill_in 'Title', with: 'Test event'
-        fill_in 'Start time', with: start_time
-        fill_in 'End time', with: end_time
+        fill_in 'Start at', with: start_at
+        fill_in 'End at', with: end_at
         fill_in 'Location', with: 'Online'
         fill_in 'Description', with: 'Some description'
         click_button 'Create'
@@ -27,14 +27,14 @@ RSpec.describe 'User creates event', type: :system do
     context 'when event data is inccorect' do
       it "shows 'Title can't be blank' error and rerender the page" do
         user = create(:user)
-        start_time = 1.hour.from_now
-        end_time = 2.hours.from_now
+        start_at = 1.hour.from_now
+        end_at = 2.hours.from_now
 
         login(user)
         visit root_path
         click_link 'Create event'
-        fill_in 'Start time', with: start_time
-        fill_in 'End time', with: end_time
+        fill_in 'Start at', with: start_at
+        fill_in 'End at', with: end_at
         fill_in 'Location', with: 'Online'
         fill_in 'Description', with: 'Some description'
         click_button 'Create'
@@ -45,15 +45,15 @@ RSpec.describe 'User creates event', type: :system do
 
       it "shows 'Location can't be blank' error and rerender the page" do
         user = create(:user)
-        start_time = 1.hour.from_now
-        end_time = 2.hours.from_now
+        start_at = 1.hour.from_now
+        end_at = 2.hours.from_now
 
         login(user)
         visit root_path
         click_link 'Create event'
         fill_in 'Title', with: 'Test event'
-        fill_in 'Start time', with: start_time
-        fill_in 'End time', with: end_time
+        fill_in 'Start at', with: start_at
+        fill_in 'End at', with: end_at
         fill_in 'Description', with: 'Some description'
         click_button 'Create'
 
@@ -63,15 +63,15 @@ RSpec.describe 'User creates event', type: :system do
 
       it "shows 'Description can't be blank' error and rerender the page" do
         user = create(:user)
-        start_time = 1.hour.from_now
-        end_time = 2.hours.from_now
+        start_at = 1.hour.from_now
+        end_at = 2.hours.from_now
 
         login(user)
         visit root_path
         click_link 'Create event'
         fill_in 'Title', with: 'Test event'
-        fill_in 'Start time', with: start_time
-        fill_in 'End time', with: end_time
+        fill_in 'Start at', with: start_at
+        fill_in 'End at', with: end_at
         fill_in 'Location', with: 'Online'
         click_button 'Create'
 
@@ -79,42 +79,42 @@ RSpec.describe 'User creates event', type: :system do
         expect(page).to have_text("Description can't be blank")
       end
 
-      it "shows 'Start time can't be in the past' error if start time earlier than current time" do
+      it "shows 'Start at can't be in the past' error if Start at earlier than current time" do
         user = create(:user)
-        start_time = 2.hours.ago
-        end_time = 1.hour.ago
+        start_at = 2.hours.ago
+        end_at = 1.hour.ago
 
         login(user)
         visit root_path
         click_link 'Create event'
         fill_in 'Title', with: 'Test event'
-        fill_in 'Start time', with: start_time
-        fill_in 'End time', with: end_time
+        fill_in 'Start at', with: start_at
+        fill_in 'End at', with: end_at
         fill_in 'Location', with: 'Online'
         fill_in 'Description', with: 'Some description'
         click_button 'Create'
 
         expect(page).to have_current_path(new_event_path)
-        expect(page).to have_text("Start time can't be in the past")
+        expect(page).to have_text("Start at can't be in the past")
       end
 
-      it "shows 'End time can't be earlier then start time' error" do
+      it "shows 'End at can't be earlier then Start at' error" do
         user = create(:user)
-        start_time = 2.hours.from_now
-        end_time = 1.hour.from_now
+        start_at = 2.hours.from_now
+        end_at = 1.hour.from_now
 
         login(user)
         visit root_path
         click_link 'Create event'
         fill_in 'Title', with: 'Test event'
-        fill_in 'Start time', with: start_time
-        fill_in 'End time', with: end_time
+        fill_in 'Start at', with: start_at
+        fill_in 'End at', with: end_at
         fill_in 'Location', with: 'Online'
         fill_in 'Description', with: 'Some description'
         click_button 'Create'
 
         expect(page).to have_current_path(new_event_path)
-        expect(page).to have_text("End time can't be earlier then start time")
+        expect(page).to have_text("End at can't be earlier then start at")
       end
     end
   end
