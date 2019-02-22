@@ -24,7 +24,7 @@ RSpec.describe 'User creates event', type: :system do
       end
     end
 
-    context 'when event data is inccorect' do
+    context 'when event data is incorrect' do
       it "shows 'Title can't be blank' error and rerender the page" do
         user = create(:user)
         start_at = 1.hour.from_now
