@@ -12,8 +12,8 @@ RSpec.describe Event, type: :model do
       subject { build(:event) }
 
       it { is_expected.to validate_presence_of(:start_at) }
-      it { is_expected.to allow_value(Time.zone.now + 10.minutes).for(:start_at) }
-      it { is_expected.not_to allow_value(Time.zone.now - 10.minutes).for(:start_at) }
+      it { is_expected.to allow_value(10.minutes.from_now).for(:start_at) }
+      it { is_expected.not_to allow_value(10.minutes.ago).for(:start_at) }
       it { is_expected.not_to allow_value('some_date').for(:start_at) }
 
       it 'allows the `start_at` to be less than the `end_at`' do
@@ -33,8 +33,8 @@ RSpec.describe Event, type: :model do
       subject { build(:event) }
 
       it { is_expected.to validate_presence_of(:end_at) }
-      it { is_expected.to allow_value(Time.zone.now + 3.hours).for(:end_at) }
-      it { is_expected.not_to allow_value(Time.zone.now - 10.minutes).for(:end_at) }
+      it { is_expected.to allow_value(2.hours.from_now).for(:end_at) }
+      it { is_expected.not_to allow_value(2.hours.ago).for(:end_at) }
       it { is_expected.not_to allow_value('some_date').for(:end_at) }
     end
 
