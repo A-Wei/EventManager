@@ -31,7 +31,7 @@ RSpec.describe InFutureValidator do
     validator.validate(record)
 
     expect(record.errors).not_to be_empty
-    expect(record.errors[:start_at]).to eq(['cannot be in the past'])
+    expect(record.errors[:start_at]).to eq(["can't be in the past"])
   end
 
   it 'handles when the value is nil' do

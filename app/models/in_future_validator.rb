@@ -3,7 +3,7 @@ class InFutureValidator < ActiveModel::EachValidator
     return if value.nil?
 
     if value < Time.zone.now
-      record.errors.add(attribute, 'cannot be in the past')
+      record.errors.add(attribute, "can't be in the past")
     end
   end
 end
