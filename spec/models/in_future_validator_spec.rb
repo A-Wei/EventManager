@@ -33,4 +33,20 @@ RSpec.describe InFutureValidator do
     expect(record.errors).not_to be_empty
     expect(record.errors[:start_at]).to eq(['start_at cannot be in the past'])
   end
+
+  it 'handles when the value is nil' do
+    model = Class.new do
+      include ActiveModel::Model
+
+      attr_accessor :start_at
+    end
+    record = model.new(start_at: nil)
+    validator = InFutureValidator.new(
+      attributes: [:start_at],
+    )
+
+    validator.validate(record)
+
+    expect(record).to be_valid
+  end
 end
