@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  belongs_to :user
+
   validates :end_at, presence: true, in_future: true
   validates :start_at, presence: true, in_future: true
   validates :title, :location, :description, presence: true
