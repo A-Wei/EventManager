@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new]
 
+  def index
+    @events = Event.all
+  end
+
   def show
     @event = Event.find(params[:id])
   end
@@ -11,6 +15,7 @@ class EventsController < ApplicationController
 
   def create
     event = Event.new(event_params)
+    event.user_id = current_user.id
 
     if event.save
       redirect_to event
@@ -22,13 +27,18 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+
+    if current_user != event.user
+      flash[:error] = 'Sorry, you are not authorized to modify this event'
+      redirect_to events_path
+    end
   end
 
   def update
     @event = Event.find(params[:id])
     event.update_attributes(event_params)
 
-    redirect_to event
+    redirect_to events_path
   end
 
   private

@@ -5,5 +5,6 @@ FactoryBot.define do
     end_at { 2.hours.from_now }
     location { 'Test Location' }
     description { 'Test Description' }
+    user
   end
 end
