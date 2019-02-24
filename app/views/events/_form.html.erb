@@ -33,4 +33,9 @@
     </strong>
   </div>
   <%= f.button :submit, yield(:button_text), class: 'button is-outlined is-medium is-primary' %>
+  <% unless current_page?(new_event_path) %>
+    <%= simple_form_for(@event, url: yield(:path), method: :delete) do |f| %>
+      <%= f.button :submit, 'Delete', class: 'button is-outlined is-medium is-primary'%>
+    <% end %>
+  <% end %>
 <% end %>

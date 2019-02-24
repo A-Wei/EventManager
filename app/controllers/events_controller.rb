@@ -45,6 +45,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    event = Event.find(params[:id])
+
+    if event.destroy
+      redirect_to events_path
+    else
+      flash[:error] = event.errors.full_messages.to_sentence
+      redirect_to edit_event_path
+    end
+  end
+
   private
 
   attr_reader :event
