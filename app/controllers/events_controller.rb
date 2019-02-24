@@ -35,10 +35,14 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:id])
-    event.update_attributes(event_params)
+    event = Event.find(params[:id])
 
-    redirect_to events_path
+    if event.update_attributes(event_params)
+      redirect_to events_path
+    else
+      flash[:error] = event.errors.full_messages.to_sentence
+      redirect_to edit_event_path
+    end
   end
 
   private
