@@ -33,7 +33,4 @@
     </strong>
   </div>
   <%= f.button :submit, yield(:button_text), class: 'button is-outlined is-medium is-primary' %>
-  <% unless current_page?(new_event_path) %>
-    <%= render 'delete_button' %>
-  <% end %>
 <% end %>
