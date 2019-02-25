@@ -27,11 +27,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-
-    if current_user != event.user
-      flash[:error] = 'Sorry, you are not authorized to modify this event'
-      redirect_to events_path
-    end
+    authorize @event
   end
 
   def update

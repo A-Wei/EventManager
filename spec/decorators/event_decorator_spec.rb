@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EventDecorator do
   describe '#start_and_end_at' do
-    context 'When start_at and end_at have the same date' do
+    context 'when start_at and end_at have the same date' do
       it 'returns the formate "%Y-%m-%d,%H:%M" to "%H:%M"' do
         start_at = 1.day.from_now.beginning_of_day
         end_at = 1.day.from_now
