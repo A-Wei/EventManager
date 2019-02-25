@@ -1,7 +1,29 @@
-<% @events.each do |event| %>
-  <p><%= event.title %></p>
-  <p><%= event.date_range %></p>
-  <p><%= event.location %></p>
-  <p><%= event.description %></p>
-  <br>
-<% end %>
+<section class='section'>
+    <div class='columns is-centered'>
+      <div class='column is-4'>
+        <h2 class='title is-2 has-text-centered'>All Events</h2>
+          <% @events.each do |event| %>
+          <div class="box">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong><%= pretty_title(event) %></strong> <small><%= event.date_range %></small>
+                    <br>
+                    <br>
+                    <strong>Description: </strong><%= event.description %>
+                    <br>
+                    <strong class='is-small'>Location: </strong> <%= event.location %>
+                  </p>
+                </div>
+              </div>
+              <% if creator?(current_user, event)%>
+                <div class="media-right">
+                  <%= link_to 'Delete', event_path(event), method: :delete %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+</section>
