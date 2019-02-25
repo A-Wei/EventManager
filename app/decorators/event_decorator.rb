@@ -1,7 +1,7 @@
 class EventDecorator < ApplicationDecorator
   delegate_all
 
-  def start_and_end_at
+  def date_range
     if one_day_event?
       "#{start_at.strftime('%Y-%m-%d,%H:%M')} to #{end_at.strftime('%H:%M')}"
     else

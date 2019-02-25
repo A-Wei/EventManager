@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EventDecorator do
-  describe '#start_and_end_at' do
+  describe '#date_range' do
     context 'when start_at and end_at have the same date' do
       it 'returns the formate "%Y-%m-%d,%H:%M" to "%H:%M"' do
         start_at = 1.day.from_now.beginning_of_day
@@ -9,7 +9,7 @@ RSpec.describe EventDecorator do
         event = build(:event, start_at: start_at, end_at: end_at)
         decorated = event.decorate
 
-        result = decorated.start_and_end_at
+        result = decorated.date_range
 
         string = "#{start_at.strftime('%Y-%m-%d,%H:%M')} to #{end_at.strftime('%H:%M')}"
         expect(result).to eq(string)
@@ -21,7 +21,7 @@ RSpec.describe EventDecorator do
         event = build(:event, start_at: start_at, end_at: end_at)
         decorated = event.decorate
 
-        result = decorated.start_and_end_at
+        result = decorated.date_range
 
         string = "#{start_at.strftime('%Y-%m-%d,%H:%M')} to #{end_at.strftime('%Y-%m-%d,%H:%M')}"
         expect(result).to eq(string)
