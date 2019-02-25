@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+
+  pundit:
+   default: 'You cannot perform this action.'
+   event_policy:
+     edit?: 'Sorry, you are not authorized to modify this event'
