@@ -1,0 +1,3 @@
+<%= simple_form_for(@event, url: yield(:path), method: :delete) do |f| %>
+  <%= f.button :submit, 'Delete', class: 'button is-outlined is-medium is-primary'%>
+<% end %>
