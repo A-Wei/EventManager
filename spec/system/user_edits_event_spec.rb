@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User edits an event', type: :system do
   context 'when user is the creator of the event' do
     context 'when update data is correct' do
-      it 'saves the change and redirects to show page' do
+      it 'saves the change and redirects to index page' do
         user = create(:user)
         event = create(:event, user: user)
 
@@ -94,20 +94,6 @@ RSpec.describe 'User edits an event', type: :system do
       visit edit_event_path(event)
 
       expect(page).to have_text('Sorry, you are not authorized to modify this event')
-      expect(page).to have_current_path(events_path)
-    end
-  end
-
-  context 'when the user clicks "Delete" button' do
-    it 'deletes the event and redirects to event index page' do
-      user = create(:user)
-      event = create(:event, user: user)
-
-      login(user)
-      visit edit_event_path(event)
-      click_button('Delete')
-
-      expect(Event.count).to eq(0)
       expect(page).to have_current_path(events_path)
     end
   end
