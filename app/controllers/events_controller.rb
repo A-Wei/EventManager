@@ -45,6 +45,7 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
 
     if event.destroy
+      flash[:success] = "#{event.title} has been deleted"
       redirect_to events_path
     else
       flash[:error] = event.errors.full_messages.to_sentence
