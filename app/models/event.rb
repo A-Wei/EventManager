@@ -7,7 +7,7 @@ class Event < ApplicationRecord
 
   validate :end_at_ahead_of_start_at
 
-  scope :by_start_at_asc, -> { order('start_at') }
+  scope :by_start_at_asc, -> { order(start_at: :asc) }
 
   def creator?(given_user)
     user == given_user

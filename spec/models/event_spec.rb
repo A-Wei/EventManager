@@ -52,7 +52,7 @@ RSpec.describe Event, type: :model do
   end
 
   describe 'scope' do
-    describe '#by_start_at' do
+    describe '.by_start_at_asc' do
       it 'returns events ordered by start_at ascending order' do
         travel_to Time.new(2019, 2, 1, 7) do
           apr_event = create(:event, start_at: '2019-04-01, 10:00', end_at: '2019-04-01, 11:00')
