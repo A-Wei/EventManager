@@ -17,7 +17,7 @@
                   </p>
                 </div>
               </div>
-              <% if creator?(current_user, event)%>
+              <% if event.creator?(current_user) %>
                 <div class="media-right">
                   <%= link_to 'Delete', event_path(event), method: :delete %>
                 </div>

@@ -9,6 +9,10 @@ class Event < ApplicationRecord
 
   scope :by_start_at_asc, -> { order('start_at') }
 
+  def creator?(given_user)
+    user == given_user
+  end
+
   private
 
   def end_at_ahead_of_start_at

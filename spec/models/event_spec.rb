@@ -66,4 +66,24 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe '#creator?' do
+    it 'returns true when the given user is the event creator' do
+      user = build(:user)
+      event = build(:event, user: user)
+
+      result = event.creator?(user)
+
+      expect(result).to eq(true)
+    end
+
+    it 'returns false when the given_user is not the event creator' do
+      user = build(:user)
+      event = build(:event)
+
+      result = event.creator?(user)
+
+      expect(result).to eq(false)
+    end
+  end
 end
