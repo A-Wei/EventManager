@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :logged_in_user, only: [:new]
 
   def index
-    @events = Event.all.decorate
+    @events = Event.in_future.decorate
   end
 
   def show

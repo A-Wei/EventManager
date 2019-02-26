@@ -7,6 +7,12 @@ class Event < ApplicationRecord
 
   validate :end_at_ahead_of_start_at
 
+  scope :in_future, -> { where('start_at > ?', Time.now).order(start_at: :asc) }
+
+  def creator?(given_user)
+    user == given_user
+  end
+
   private
 
   def end_at_ahead_of_start_at

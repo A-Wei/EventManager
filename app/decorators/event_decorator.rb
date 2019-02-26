@@ -9,6 +9,10 @@ class EventDecorator < ApplicationDecorator
     end
   end
 
+  def display_title
+    title.titleize
+  end
+
   private
 
   def one_day_event?
