@@ -52,15 +52,21 @@ RSpec.describe Event, type: :model do
   end
 
   describe 'scope' do
-    describe '.earliest' do
-      it 'returns events ordered by start_at ascending order' do
+    describe '.coming_next' do
+      it 'returns future events ordered by start_at ascending order' do
+        travel_to Time.new(2019, 1, 1, 7) do
+          create(:event, start_at: '2019-01-01, 10:00', end_at: '2019-01-01, 11:00')
+          create(:event, start_at: '2019-01-02, 10:00', end_at: '2019-01-02, 11:00')
+        end
+
         travel_to Time.new(2019, 2, 1, 7) do
           apr_event = create(:event, start_at: '2019-04-01, 10:00', end_at: '2019-04-01, 11:00')
           mar_event = create(:event, start_at: '2019-03-01, 10:00', end_at: '2019-03-01, 11:00')
           feb_event = create(:event, start_at: '2019-02-01, 10:00', end_at: '2019-02-01, 11:00')
 
-          events = Event.all.earliest
+          events = Event.all.coming_next
 
+          expect(Event.all.count).to eq(5)
           expect(events).to eq([feb_event, mar_event, apr_event])
         end
       end
