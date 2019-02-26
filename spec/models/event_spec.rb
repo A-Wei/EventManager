@@ -50,4 +50,20 @@ RSpec.describe Event, type: :model do
       it { is_expected.to validate_presence_of(:description) }
     end
   end
+
+  describe 'scope' do
+    describe '#by_start_at' do
+      it 'returns events ordered by start_at ascending order' do
+        travel_to Time.new(2019,02,01,07) do
+          apr_event = create(:event, start_at: '2019-04-01, 10:00', end_at: '2019-04-01, 11:00')
+          mar_event = create(:event, start_at: '2019-03-01, 10:00', end_at: '2019-03-01, 11:00')
+          feb_event = create(:event, start_at: '2019-02-01, 10:00', end_at: '2019-02-01, 11:00')
+
+          events = Event.all.by_start_at_asc
+
+          expect(events).to eq([feb_event, mar_event, apr_event])
+        end
+      end
+    end
+  end
 end

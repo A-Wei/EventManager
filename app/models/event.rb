@@ -7,6 +7,8 @@ class Event < ApplicationRecord
 
   validate :end_at_ahead_of_start_at
 
+  scope :by_start_at_asc, -> { order('start_at') }
+
   private
 
   def end_at_ahead_of_start_at
