@@ -20,14 +20,4 @@ RSpec.describe EventsHelper do
       expect(result).to eq(false)
     end
   end
-
-  describe '#pretty_title?' do
-    it 'returns titlelized event title' do
-      event = build(:event, title: 'new event')
-
-      title = pretty_title(event)
-
-      expect(title).to eq('New Event')
-    end
-  end
 end

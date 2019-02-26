@@ -32,4 +32,15 @@ RSpec.describe EventDecorator do
       end
     end
   end
+
+  describe '#display_title' do
+    it 'returns titalized event title' do
+      event = build(:event, title: 'test event')
+      decorated = event.decorate
+
+      title = decorated.display_title
+
+      expect(title).to eq('Test Event')
+    end
+  end
 end
