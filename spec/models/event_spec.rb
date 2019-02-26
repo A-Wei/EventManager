@@ -64,7 +64,7 @@ RSpec.describe Event, type: :model do
           mar_event = create(:event, start_at: '2019-03-01, 10:00', end_at: '2019-03-01, 11:00')
           feb_event = create(:event, start_at: '2019-02-01, 10:00', end_at: '2019-02-01, 11:00')
 
-          events = Event.all.in_future
+          events = Event.in_future
 
           expect(Event.all.count).to eq(5)
           expect(events).to eq([feb_event, mar_event, apr_event])
