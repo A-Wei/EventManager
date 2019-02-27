@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User searches events', type: :system do
-  it 'returns all events containing the given term in title' do
+  it 'returns all events, past and future, where the title matches the search term' do
     travel_to Time.new(2019, 2, 2, 10) do
       create(:event, title: 'Test Event')
     end
