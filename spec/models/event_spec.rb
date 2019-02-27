@@ -71,6 +71,17 @@ RSpec.describe Event, type: :model do
         end
       end
     end
+
+    describe '.search_by_title' do
+      it 'finds the events by the title, regardless of casing, matching the given term' do
+        event1 = create(:event, title: 'Test event')
+        create(:event, title: 'Another event')
+
+        result = Event.search_by_title('test')
+
+        expect(result).to eq([event1])
+      end
+    end
   end
 
   describe '#creator?' do

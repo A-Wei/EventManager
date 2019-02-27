@@ -8,6 +8,7 @@ class Event < ApplicationRecord
   validate :end_at_ahead_of_start_at
 
   scope :in_future, -> { where('start_at > ?', Time.now).order(start_at: :asc) }
+  scope :search_by_title, ->(term) { where('title ILIKE ?', "%#{term}%") }
 
   def creator?(given_user)
     user == given_user

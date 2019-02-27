@@ -1,4 +1,4 @@
-<%= simple_form_for(@search, url: search_path) do |f|%>
-  <%= f.input :search, hint: 'Search Here', label: false %>
-  <%= f.button: :submit %>
+<%= simple_form_for(:search, url: search_path) do |f|%>
+  <%= f.input :term, hint: 'Search Here' %>
+  <%= f.button :submit, 'Submit' %>
 <% end %>
