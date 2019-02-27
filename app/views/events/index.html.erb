@@ -2,6 +2,7 @@
     <div class='columns is-centered'>
       <div class='column is-4'>
         <h2 class='title is-2 has-text-centered'>All Events</h2>
+          <%= render 'search_form' %>
           <% @events.each do |event| %>
           <div class="box">
             <article class="media">
