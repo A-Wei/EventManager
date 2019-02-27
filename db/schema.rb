@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_123444) do
+ActiveRecord::Schema.define(version: 2019_02_27_134625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2019_02_23_123444) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.index ["description"], name: "index_events_on_description"
+    t.index ["location"], name: "index_events_on_location"
+    t.index ["title"], name: "index_events_on_title"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -36,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_123444) do
     t.string "reset_password_digest"
     t.datetime "reset_password_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name"
   end
 
   add_foreign_key "events", "users"
