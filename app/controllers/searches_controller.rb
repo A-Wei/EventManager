@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
   def create
-    @results = Event.search_by_title(search_params[:term])
+    @results = Search.for(search_params[:term])
   end
 
   private

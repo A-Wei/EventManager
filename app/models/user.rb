@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   has_many :events
 
+  scope :search_by_email, ->(term) { where('email ILIKE ?', "%#{term}%") }
+
   def logged_in?
     true
   end

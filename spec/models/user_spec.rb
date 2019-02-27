@@ -29,6 +29,19 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'scopes' do
+    describe '.search_by_email' do
+      it 'finds the users by the email, regardless of casing, matching the given term' do
+        alice = create(:user, email: 'alice@example.com')
+        create(:user, email: 'bob@example.com')
+
+        result = User.search_by_email('Alice')
+
+        expect(result).to eq([alice])
+      end
+    end
+  end
+
   describe '#logged_in?' do
     it 'returns true' do
       expect(User.new.logged_in?).to eq(true)
