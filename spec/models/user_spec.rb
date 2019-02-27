@@ -23,9 +23,9 @@ RSpec.describe User, type: :model do
 
   describe 'before_create' do
     it 'saves the emails as lowercase' do
-      user = create(:user, email: 'TeSt@tEsT.cOm')
+      user = create(:user, email: 'TeSt@Example.cOm')
 
-      expect(user.email).to eq('test@test.com')
+      expect(user.email).to eq('test@example.com')
     end
   end
 
