@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  include PgSearch
+
   belongs_to :user
 
   validates :end_at, presence: true, in_future: true
@@ -8,7 +10,17 @@ class Event < ApplicationRecord
   validate :end_at_ahead_of_start_at
 
   scope :in_future, -> { where('start_at > ?', Time.now).order(start_at: :asc) }
-  scope :search_by_title, ->(term) { where('title ILIKE ?', "%#{term}%") }
+  pg_search_scope :search, against: [:title, :location, :description],
+                           using: {
+                             tsearch: {
+                               any_word: true,
+                               dictionary: 'english',
+                               normalization: 8,
+                             },
+                             trigram: {
+                               threshold: 0.2,
+                             },
+                           }
 
   def creator?(given_user)
     user == given_user
