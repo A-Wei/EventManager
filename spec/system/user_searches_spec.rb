@@ -52,6 +52,7 @@ RSpec.describe 'User searches', type: :system do
 
       expect(page).to have_text("Bob's birthday")
       expect(page).to have_text('bob@example.com')
+      expect(page).not_to have_text('Alice')
     end
   end
 end
