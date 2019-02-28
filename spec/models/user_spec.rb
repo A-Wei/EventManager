@@ -29,34 +29,30 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'pg_search_scope' do
-    describe '.search' do
-      context 'when there is only 1 term' do
-        it 'finds the users by matching the given term with' \
-          "user's name or email, regardless of casing" do
-          user1 = create(:user, name: 'calvin')
-          user2 = create(:user, email: 'calvin@example.com')
-          create(:user)
+  describe '.search' do
+    context 'when case-insensitive search only 1 term' do
+      it 'returns the events that contains the given term in either name or email' do
+        user1 = create(:user, name: 'calvin')
+        user2 = create(:user, email: 'calvin@example.com')
+        create(:user)
 
-          result = User.search('Calvin')
+        result = User.search('Calvin')
 
-          expect(result).to match_array([user1, user2])
-        end
+        expect(result).to match_array([user1, user2])
       end
+    end
 
-      context 'when there are multiple terms' do
-        it 'finds the users by matching any given term with ' \
-          "user's name or email, regardless of casing" do
-          user1 = create(:user, name: 'calvin')
-          user2 = create(:user, email: 'calvin@example.com')
-          user3 = create(:user, name: 'david')
-          user4 = create(:user, email: 'david@example.com')
-          create(:user)
+    context 'when case-insensitive search multiple terms' do
+      it 'returns the users that contains any given term in either name or email' do
+        user1 = create(:user, name: 'calvin')
+        user2 = create(:user, email: 'calvin@example.com')
+        user3 = create(:user, name: 'david')
+        user4 = create(:user, email: 'david@example.com')
+        create(:user)
 
-          result = User.search('Calvin David')
+        result = User.search('Calvin David')
 
-          expect(result).to match_array([user1, user2, user3, user4])
-        end
+        expect(result).to match_array([user1, user2, user3, user4])
       end
     end
   end

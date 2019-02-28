@@ -73,34 +73,30 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe 'pg_search_scope' do
-    describe '.search' do
-      context 'when there is only 1 term' do
-        it 'finds the events by matching the given term with ' \
-          "event's title location or description, regardless of casing" do
-          event1 = create(:event, title: 'Example')
-          event2 = create(:event, location: 'example')
-          event3 = create(:event, description: 'example')
-          create(:event)
+  describe '.search' do
+    context 'when case-insensitive search only 1 term' do
+      it 'returns the events that contains the given term in either title/location/description' do
+        event1 = create(:event, title: 'Example')
+        event2 = create(:event, location: 'example')
+        event3 = create(:event, description: 'example')
+        create(:event)
 
-          result = Event.search('example')
+        result = Event.search('example')
 
-          expect(result).to eq([event1, event2, event3])
-        end
+        expect(result).to eq([event1, event2, event3])
       end
+    end
 
-      context 'when are multiple terms' do
-        it 'finds the events by matching any given term with ' \
-          "event's title location or description, regardless of casing" do
-          event1 = create(:event, title: 'amazing')
-          event2 = create(:event, location: 'new')
-          event3 = create(:event, description: 'example')
-          create(:event)
+    context 'when case-insensitive search multiple terms' do
+      it 'returns the events that contains any given term in either title/location/description' do
+        event1 = create(:event, title: 'amazing')
+        event2 = create(:event, location: 'new')
+        event3 = create(:event, description: 'example')
+        create(:event)
 
-          result = Event.search('Amazing New Example')
+        result = Event.search('Amazing New Example')
 
-          expect(result).to eq([event1, event2, event3])
-        end
+        expect(result).to eq([event1, event2, event3])
       end
     end
   end
