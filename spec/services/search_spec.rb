@@ -4,36 +4,39 @@ RSpec.describe Search do
   describe '.for' do
     context 'when searching only for events' do
       it 'returns the matching events' do
-        event = create(:event, title: 'Test event')
-        create(:event, title: 'Some event')
+        event1 = create(:event, title: 'Unique title')
+        event2 = create(:event, location: 'Unique location')
+        event3 = create(:event, description: 'Unique description')
+        create(:event)
 
-        result = Search.for('test')
+        result = Search.for('unique')
 
-        expect(result).to eq([event])
+        expect(result).to eq([event1, event2, event3])
       end
     end
 
     context 'when searching only for users' do
       it 'returns the matching users' do
-        alice = create(:user, email: 'alice@example.com')
-        create(:user, email: 'bob@example.com')
+        user1 = create(:user, name: 'calvin')
+        user2 = create(:user, email: 'calvin@example.com')
+        create(:user)
 
-        result = Search.for('alice')
+        result = Search.for('calvin')
 
-        expect(result).to eq([alice])
+        expect(result).to eq([user1, user2])
       end
     end
 
     context 'when searching for both events and users' do
       it 'returns the matching objects' do
-        alice = create(:user, email: 'alice@example.com')
-        create(:user, email: 'bob@example.com')
-        event = create(:event, title: "Alice's birthday")
-        create(:event, title: "Bob's birthday")
+        user = create(:user, name: 'bob')
+        event = create(:event, title: "Bob's birthday")
+        create(:user)
+        create(:event)
 
-        result = Search.for('alice')
+        result = Search.for('bob')
 
-        expect(result).to match_array([event, alice])
+        expect(result).to match_array([event, user])
       end
     end
   end

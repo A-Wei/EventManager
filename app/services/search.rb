@@ -8,7 +8,7 @@ class Search
   end
 
   def for
-    Event.search_by_title(term) + User.search_by_email(term)
+    Event.search(term) + User.search(term)
   end
 
   private
