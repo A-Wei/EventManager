@@ -3,6 +3,8 @@ class User < ApplicationRecord
   attr_accessor :reset_password_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  RANKED_BY_NUMBER_OF_MATCHES = 8
+  MINIMUM_MATCHING_PERCENT = 0.2
 
   before_create { email.downcase! }
 
@@ -16,17 +18,20 @@ class User < ApplicationRecord
 
   has_many :events
 
-  pg_search_scope :search, against: [:name, :email],
-                           using: {
-                             tsearch: {
-                               any_word: true,
-                               dictionary: 'english',
-                               normalization: 8,
-                             },
-                             trigram: {
-                               threshold: 0.2,
-                             },
-                           }
+  pg_search_scope(
+    :search,
+    against: [:name, :email],
+    using: {
+      tsearch: {
+        any_word: true,
+        dictionary: 'english',
+        normalization: RANKED_BY_NUMBER_OF_MATCHES,
+      },
+      trigram: {
+        threshold: MINIMUM_MATCHING_PERCENT,
+      },
+    },
+  )
 
   def logged_in?
     true
