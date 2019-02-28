@@ -29,15 +29,34 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'scopes' do
-    describe '.search_by_email' do
-      it 'finds the users by the email, regardless of casing, matching the given term' do
-        alice = create(:user, email: 'alice@example.com')
-        create(:user, email: 'bob@example.com')
+  describe 'pg_search_scope' do
+    describe '.search' do
+      context 'when there is only 1 term' do
+        it 'finds the users by matching the given term with' \
+          "user's name or email, regardless of casing" do
+          user1 = create(:user, name: 'calvin')
+          user2 = create(:user, email: 'calvin@example.com')
+          create(:user)
 
-        result = User.search_by_email('Alice')
+          result = User.search('Calvin')
 
-        expect(result).to eq([alice])
+          expect(result).to match_array([user1, user2])
+        end
+      end
+
+      context 'when there are multiple terms' do
+        it 'finds the users by matching any given term with ' \
+          "user's name or email, regardless of casing" do
+          user1 = create(:user, name: 'calvin')
+          user2 = create(:user, email: 'calvin@example.com')
+          user3 = create(:user, name: 'david')
+          user4 = create(:user, email: 'david@example.com')
+          create(:user)
+
+          result = User.search('Calvin David')
+
+          expect(result).to match_array([user1, user2, user3, user4])
+        end
       end
     end
   end

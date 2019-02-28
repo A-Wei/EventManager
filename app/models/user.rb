@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include PgSearch
   attr_accessor :reset_password_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
@@ -15,7 +16,17 @@ class User < ApplicationRecord
 
   has_many :events
 
-  scope :search_by_email, ->(term) { where('email ILIKE ?', "%#{term}%") }
+  pg_search_scope :search, against: [:name, :email],
+                           using: {
+                             tsearch: {
+                               any_word: true,
+                               dictionary: 'english',
+                               normalization: 8,
+                             },
+                             trigram: {
+                               threshold: 0.2,
+                             },
+                           }
 
   def logged_in?
     true
