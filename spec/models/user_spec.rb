@@ -23,9 +23,37 @@ RSpec.describe User, type: :model do
 
   describe 'before_create' do
     it 'saves the emails as lowercase' do
-      user = create(:user, email: 'TeSt@tEsT.cOm')
+      user = create(:user, email: 'TeSt@Example.cOm')
 
-      expect(user.email).to eq('test@test.com')
+      expect(user.email).to eq('test@example.com')
+    end
+  end
+
+  describe '.search' do
+    context 'when case-insensitive search only 1 term' do
+      it 'returns the events that contains the given term in either name or email' do
+        user1 = create(:user, name: 'calvin')
+        user2 = create(:user, email: 'calvin@example.com')
+        create(:user)
+
+        result = User.search('Calvin')
+
+        expect(result).to match_array([user1, user2])
+      end
+    end
+
+    context 'when case-insensitive search multiple terms' do
+      it 'returns the users that contains any given term in either name or email' do
+        user1 = create(:user, name: 'calvin')
+        user2 = create(:user, email: 'calvin@example.com')
+        user3 = create(:user, name: 'david')
+        user4 = create(:user, email: 'david@example.com')
+        create(:user)
+
+        result = User.search('Calvin David')
+
+        expect(result).to match_array([user1, user2, user3, user4])
+      end
     end
   end
 

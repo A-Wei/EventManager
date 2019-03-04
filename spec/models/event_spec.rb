@@ -73,6 +73,34 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  describe '.search' do
+    context 'when case-insensitive search only 1 term' do
+      it 'returns the events that contains the given term in either title/location/description' do
+        event1 = create(:event, title: 'Example')
+        event2 = create(:event, location: 'example')
+        event3 = create(:event, description: 'example')
+        create(:event)
+
+        result = Event.search('example')
+
+        expect(result).to eq([event1, event2, event3])
+      end
+    end
+
+    context 'when case-insensitive search multiple terms' do
+      it 'returns the events that contains any given term in either title/location/description' do
+        event1 = create(:event, title: 'amazing')
+        event2 = create(:event, location: 'new')
+        event3 = create(:event, description: 'example')
+        create(:event)
+
+        result = Event.search('Amazing New Example')
+
+        expect(result).to eq([event1, event2, event3])
+      end
+    end
+  end
+
   describe '#creator?' do
     it 'returns true when the given user is the event creator' do
       user = build(:user)
