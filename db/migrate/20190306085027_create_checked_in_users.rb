@@ -1,8 +1,10 @@
 class CreateCheckedInUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :checked_in_users, primary_key: false do |t|
-      t.references :event
-      t.references :user
+      t.references :event, null: false
+      t.references :user, null: false
+      t.datetime :checked_in_at
+      t.datetime :checked_out_at
 
       t.timestamps
     end

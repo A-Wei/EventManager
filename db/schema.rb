@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 2019_03_06_085027) do
   enable_extension "plpgsql"
 
   create_table "checked_in_users", primary_key: "false", force: :cascade do |t|
-    t.bigint "event_id"
-    t.bigint "user_id"
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "checked_in_at"
+    t.datetime "checked_out_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id", "user_id"], name: "index_checked_in_users_on_event_id_and_user_id", unique: true
