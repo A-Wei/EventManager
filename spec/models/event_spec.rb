@@ -126,4 +126,27 @@ RSpec.describe Event, type: :model do
       expect(result).to eq(false)
     end
   end
+
+  describe '#checked_in?' do
+    it 'returns true if user have checked in' do
+      user = build(:user)
+      event = build(:event)
+      create(:checked_in_user, event: event, user: user)
+
+      result = event.checked_in?(user)
+
+      expect(result).to eq(true)
+    end
+
+    it 'returns false if user have not checked in' do
+      user1 = build(:user)
+      user2 = build(:user)
+      event = build(:event)
+      create(:checked_in_user, event: event, user: user1)
+
+      result = event.checked_in?(user2)
+
+      expect(result).to eq(false)
+    end
+  end
 end
