@@ -128,7 +128,7 @@ RSpec.describe Event, type: :model do
   end
 
   describe '#checked_in?' do
-    it 'returns true if user have checked in' do
+    it 'returns true if the given user have checked in' do
       user = create(:user)
       event = create(:event)
       create(:event_attendant, event: event, user: user)
@@ -138,10 +138,9 @@ RSpec.describe Event, type: :model do
       expect(result).to eq(true)
     end
 
-    it 'returns false if user have not checked in' do
+    it 'returns false if the given user have not checked in' do
       user = create(:user)
       event = create(:event)
-      create(:event_attendant, event: event)
 
       result = event.checked_in?(user)
 
@@ -150,7 +149,7 @@ RSpec.describe Event, type: :model do
   end
 
   describe '#checked_out?' do
-    it 'returns true if user have checked out' do
+    it 'returns true if the given user have checked out' do
       user = create(:user)
       event = create(:event)
       create(
@@ -166,10 +165,16 @@ RSpec.describe Event, type: :model do
       expect(result).to eq(true)
     end
 
-    it 'returns false if user have not checked out' do
+    it 'returns false if the given user have not checked out' do
       user = create(:user)
       event = create(:event)
-      create(:event_attendant, event: event, user: user, checked_in_at: 1.hour.ago)
+      create(
+        :event_attendant,
+        event: event,
+        user: user,
+        checked_in_at: 1.hour.ago,
+        checked_out_at: nil,
+      )
 
       result = event.checked_out?(user)
 
