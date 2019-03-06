@@ -35,7 +35,13 @@ class Event < ApplicationRecord
   end
 
   def checked_in?(given_user)
-    participants.include?(given_user)
+    participants.include?(given_user) &&
+    checked_in_users.find_by(user_id: given_user.id).checked_out_at == nil
+  end
+
+  def checked_out?(given_user)
+    participants.include?(given_user) &&
+    checked_in_users.find_by(user_id: given_user.id).checked_out_at != nil
   end
 
   private

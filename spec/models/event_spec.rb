@@ -139,12 +139,39 @@ RSpec.describe Event, type: :model do
     end
 
     it 'returns false if user have not checked in' do
-      user1 = build(:user)
-      user2 = build(:user)
+      user = build(:user)
       event = build(:event)
-      create(:checked_in_user, event: event, user: user1)
+      create(:checked_in_user, event: event)
 
-      result = event.checked_in?(user2)
+      result = event.checked_in?(user)
+
+      expect(result).to eq(false)
+    end
+  end
+
+  describe '#checked_out?' do
+    it 'returns true if user have checked out' do
+      user = build(:user)
+      event = build(:event)
+      create(
+        :checked_in_user,
+        event: event,
+        user: user,
+        checked_in_at: 1.hour.ago,
+        checked_out_at: Time.zone.now
+      )
+
+      result = event.checked_out?(user)
+
+      expect(result).to eq(true)
+    end
+
+    it 'returns false if user have not checked out' do
+      user = build(:user)
+      event = build(:event)
+      create(:checked_in_user, event: event, user: user, checked_in_at: 1.hour.ago)
+
+      result = event.checked_out?(user)
 
       expect(result).to eq(false)
     end
