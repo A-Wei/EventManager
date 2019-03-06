@@ -29,4 +29,15 @@ RSpec.describe 'User checks in an event', type: :system do
       end
     end
   end
+
+  describe 'when user not logged in' do
+    it "redirects to login page when click 'Check In' link" do
+      create(:event)
+
+      visit events_path
+      click_link('Check In')
+
+      expect(page).to have_current_path(login_path)
+    end
+  end
 end

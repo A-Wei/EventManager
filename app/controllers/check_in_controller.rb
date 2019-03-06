@@ -1,4 +1,6 @@
 class CheckInController < ApplicationController
+  before_action :logged_in_user
+
   def create
     event = Event.find(params[:id])
     CheckedInUser.create(event: event, user: current_user)
