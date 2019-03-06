@@ -1,0 +1,5 @@
+<% if event.checked_in?(current_user) %>
+  <%= link_to 'Check Out', check_out_event_path(event), method: :delete %>
+<% else %>
+  <%= link_to 'Check In', check_in_event_path(event), method: :post %>
+<% end %>
