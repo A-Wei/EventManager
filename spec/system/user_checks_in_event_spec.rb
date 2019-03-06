@@ -18,7 +18,7 @@ RSpec.describe 'User checks in an event', type: :system do
     context "when clicking 'check out' link for an event" do
       it "updates the checked_out_at time and show 'Participated' link" do
         user = create(:user)
-        event = create(:event)
+        create(:event)
 
         login(user)
         visit events_path

@@ -5,8 +5,8 @@ class Event < ApplicationRecord
   MINIMUM_MATCHING_PERCENT = 0.2
 
   belongs_to :user
-  has_many :checked_in_users
-  has_many :participants, through: :checked_in_users, source: :user
+  has_many :event_attendants
+  has_many :attendants, through: :event_attendants, source: :user
 
   validates :end_at, presence: true, in_future: true
   validates :start_at, presence: true, in_future: true
@@ -35,13 +35,13 @@ class Event < ApplicationRecord
   end
 
   def checked_in?(given_user)
-    participants.include?(given_user) &&
-    checked_in_users.find_by(user_id: given_user.id).checked_out_at == nil
+    attendants.include?(given_user) &&
+      event_attendants.find_by(user_id: given_user.id).checked_out_at.nil?
   end
 
   def checked_out?(given_user)
-    participants.include?(given_user) &&
-    checked_in_users.find_by(user_id: given_user.id).checked_out_at != nil
+    attendants.include?(given_user) &&
+      !event_attendants.find_by(user_id: given_user.id).checked_out_at.nil?
   end
 
   private

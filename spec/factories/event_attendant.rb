@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :checked_in_user do
+  factory :event_attendant do
     event
     user
   end

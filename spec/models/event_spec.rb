@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do
   describe 'association' do
     it { is_expected.to belong_to(:user) }
-    it { is_expected.to have_many(:checked_in_users) }
-    it { is_expected.to have_many(:participants).through(:checked_in_users) }
+    it { is_expected.to have_many(:event_attendants) }
+    it { is_expected.to have_many(:attendants).through(:event_attendants) }
   end
 
   describe 'validations' do
@@ -129,9 +129,9 @@ RSpec.describe Event, type: :model do
 
   describe '#checked_in?' do
     it 'returns true if user have checked in' do
-      user = build(:user)
-      event = build(:event)
-      create(:checked_in_user, event: event, user: user)
+      user = create(:user)
+      event = create(:event)
+      create(:event_attendant, event: event, user: user)
 
       result = event.checked_in?(user)
 
@@ -139,9 +139,9 @@ RSpec.describe Event, type: :model do
     end
 
     it 'returns false if user have not checked in' do
-      user = build(:user)
-      event = build(:event)
-      create(:checked_in_user, event: event)
+      user = create(:user)
+      event = create(:event)
+      create(:event_attendant, event: event)
 
       result = event.checked_in?(user)
 
@@ -151,14 +151,14 @@ RSpec.describe Event, type: :model do
 
   describe '#checked_out?' do
     it 'returns true if user have checked out' do
-      user = build(:user)
-      event = build(:event)
+      user = create(:user)
+      event = create(:event)
       create(
-        :checked_in_user,
+        :event_attendant,
         event: event,
         user: user,
         checked_in_at: 1.hour.ago,
-        checked_out_at: Time.zone.now
+        checked_out_at: Time.zone.now,
       )
 
       result = event.checked_out?(user)
@@ -167,9 +167,9 @@ RSpec.describe Event, type: :model do
     end
 
     it 'returns false if user have not checked out' do
-      user = build(:user)
-      event = build(:event)
-      create(:checked_in_user, event: event, user: user, checked_in_at: 1.hour.ago)
+      user = create(:user)
+      event = create(:event)
+      create(:event_attendant, event: event, user: user, checked_in_at: 1.hour.ago)
 
       result = event.checked_out?(user)
 

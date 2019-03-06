@@ -4,29 +4,29 @@ class CheckInController < ApplicationController
 
   def create
     event = Event.find(params[:id])
-    CheckedInUser.create(event: event, user: current_user, checked_in_at: Time.zone.now)
+    EventAttendant.create(event: event, user: current_user, checked_in_at: Time.zone.now)
     redirect_to events_path
   end
 
   def destroy
-    checked_in_user = find_checked_in_user
-    checked_in_user.checked_out_at = Time.zone.now
-    checked_in_user.save
+    event_attendent = find_attendant
+    event_attendent.checked_out_at = Time.zone.now
+    event_attendent.save
     redirect_to events_path
   end
 
   private
 
-  def find_checked_in_user
-    CheckedInUser.find_by(user_id: current_user.id, event_id: params[:id])
+  def find_attendant
+    EventAttendant.find_by(event_id: params[:id], user_id: current_user.id)
   end
 
   def reset_check_in
     event = Event.find(params[:id])
 
-    if event.participants.include?(current_user)
-      find_checked_in_user.checked_in_at = Time.zone.now
-      find_checked_in_user.checked_out_at = nil
+    if event.attendants.include?(current_user)
+      find_attendant.checked_in_at = Time.zone.now
+      find_attendant.checked_out_at = nil
     end
   end
 end
