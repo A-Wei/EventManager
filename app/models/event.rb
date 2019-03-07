@@ -34,13 +34,9 @@ class Event < ApplicationRecord
     user == given_user
   end
 
-    return false if given_user.is_a?(Guest)
-
   def user_checked_in?(user)
     EventAttendant.checked_in?(self, user)
   end
-
-    return false if given_user.is_a?(Guest)
 
   def user_checked_out?(user)
     EventAttendant.checked_out?(self, user)

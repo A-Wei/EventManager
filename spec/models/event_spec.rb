@@ -137,15 +137,6 @@ RSpec.describe Event, type: :model do
 
       expect(EventAttendant).to have_received(:checked_in?).with(event, user)
     end
-
-    it 'returns false if the given user is a Guest' do
-      user = Guest.new
-      event = create(:event)
-
-      result = event.user_checked_in?(user)
-
-      expect(result).to eq(false)
-    end
   end
 
   describe '#user_checked_out?' do
@@ -157,15 +148,6 @@ RSpec.describe Event, type: :model do
       event.user_checked_out?(user)
 
       expect(EventAttendant).to have_received(:checked_out?).with(event, user)
-    end
-
-    it 'returns false if the given user is Guest object' do
-      user = Guest.new
-      event = create(:event)
-
-      result = event.user_checked_in?(user)
-
-      expect(result).to eq(false)
     end
   end
 end

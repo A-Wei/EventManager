@@ -74,6 +74,15 @@ RSpec.describe EventAttendant, type: :model do
         expect(result).to eq(false)
       end
     end
+
+    it 'returns false if the given user is a Guest object' do
+      user = Guest.new
+      event = create(:event)
+
+      result = EventAttendant.checked_in?(event, user)
+
+      expect(result).to eq(false)
+    end
   end
 
   describe '.checked_out?' do
@@ -120,6 +129,15 @@ RSpec.describe EventAttendant, type: :model do
 
         expect(result).to eq(false)
       end
+    end
+
+    it 'returns false if the given user is a Guest object' do
+      user = Guest.new
+      event = create(:event)
+
+      result = EventAttendant.checked_out?(event, user)
+
+      expect(result).to eq(false)
     end
   end
 end
