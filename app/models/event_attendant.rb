@@ -2,8 +2,10 @@ class EventAttendant < ApplicationRecord
   belongs_to :event
   belongs_to :user
 
-  validates :user, presence: true, uniqueness: { scope: :event_id }
-  validates :event_id, presence: true
+  delegate :title, to: :event, prefix: :event
+
+  validates_presence_of :user_id, :event_id
+  validates_uniqueness_of :user, scope: :event_id, message: 'already checked in'
 
   def self.checked_in?(event, user)
     return false if user.guest?

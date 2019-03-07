@@ -3,13 +3,24 @@ class CheckInController < ApplicationController
 
   def create
     find_event
-    create_event_attendant
+    new_event_attendant = create_event_attendant
+
+    if new_event_attendant.new_record?
+      flash[:error] = new_event_attendant.errors.full_messages.to_sentence
+    else
+      flash[:success] = "You have checked in #{new_event_attendant.event_title}"
+    end
+
     redirect_to events_path
   end
 
   def destroy
     find_event_attendant
-    event_attendant.check_out
+
+    if event_attendant.check_out
+      flash[:success] = "You have checked out #{event_attendant.event_title}"
+    end
+
     redirect_to events_path
   end
 
