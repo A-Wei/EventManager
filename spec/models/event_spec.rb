@@ -135,7 +135,7 @@ RSpec.describe Event, type: :model do
 
       event.user_checked_in?(user)
 
-      expect(EventAttendant).to have_received(:checked_in?).with(event.id, user.id)
+      expect(EventAttendant).to have_received(:checked_in?).with(event, user)
     end
 
     it 'returns false if the given user is a Guest' do
@@ -156,7 +156,7 @@ RSpec.describe Event, type: :model do
 
       event.user_checked_out?(user)
 
-      expect(EventAttendant).to have_received(:checked_out?).with(event.id, user.id)
+      expect(EventAttendant).to have_received(:checked_out?).with(event, user)
     end
 
     it 'returns false if the given user is Guest object' do

@@ -27,7 +27,7 @@ RSpec.describe EventAttendant, type: :model do
           checked_out_at: nil,
         )
 
-        result = EventAttendant.checked_in?(event.id, user.id)
+        result = EventAttendant.checked_in?(event, user)
 
         expect(result).to eq(true)
       end
@@ -43,7 +43,7 @@ RSpec.describe EventAttendant, type: :model do
           checked_out_at: 1.hour.ago,
         )
 
-        result = EventAttendant.checked_in?(event.id, user.id)
+        result = EventAttendant.checked_in?(event, user)
 
         expect(result).to eq(false)
       end
@@ -58,7 +58,7 @@ RSpec.describe EventAttendant, type: :model do
           checked_in_at: nil,
         )
 
-        result = EventAttendant.checked_in?(event.id, user.id)
+        result = EventAttendant.checked_in?(event, user)
 
         expect(result).to eq(false)
       end
@@ -69,7 +69,7 @@ RSpec.describe EventAttendant, type: :model do
         user = build(:user)
         event = build(:event)
 
-        result = EventAttendant.checked_in?(event.id, user.id)
+        result = EventAttendant.checked_in?(event, user)
 
         expect(result).to eq(false)
       end
@@ -89,7 +89,7 @@ RSpec.describe EventAttendant, type: :model do
           checked_out_at: 1.hour.ago,
         )
 
-        result = EventAttendant.checked_out?(event.id, user.id)
+        result = EventAttendant.checked_out?(event, user)
 
         expect(result).to eq(true)
       end
@@ -105,7 +105,7 @@ RSpec.describe EventAttendant, type: :model do
           checked_out_at: nil,
         )
 
-        result = EventAttendant.checked_out?(event.id, user.id)
+        result = EventAttendant.checked_out?(event, user)
 
         expect(result).to eq(false)
       end
@@ -116,7 +116,7 @@ RSpec.describe EventAttendant, type: :model do
         user = build(:user)
         event = build(:event)
 
-        result = EventAttendant.checked_out?(event.id, user.id)
+        result = EventAttendant.checked_out?(event, user)
 
         expect(result).to eq(false)
       end
