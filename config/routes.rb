@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
 
   resource :search, only: [:create]
-  resources :events, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :events do
     member do
       post 'check_in' => 'check_in#create'
       delete 'check_out' => 'check_in#destroy'
