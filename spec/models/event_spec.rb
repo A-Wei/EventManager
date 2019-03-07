@@ -128,7 +128,7 @@ RSpec.describe Event, type: :model do
   end
 
   describe '#user_checked_in?' do
-    it 'calls `EventAttendant.has_checked_in?` with the event id and given_user id' do
+    it 'calls `EventAttendant.checked_in?` with the event id and given_user id' do
       allow(EventAttendant).to receive(:checked_in?)
       user = create(:user)
       event = create(:event)

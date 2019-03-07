@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User checks in checks out an event', type: :system do
   describe 'when user logged in' do
     context "when clicking 'check in' link for an event" do
-      it "registers the user as attendants and show a 'check out' link instead" do
+      it "registers the user as attendants and show a 'check out' link" do
         user = create(:user)
         create(:event)
 
