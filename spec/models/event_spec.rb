@@ -127,56 +127,43 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '#checked_in?' do
-    it 'returns true if the given user have checked in' do
+  describe '#user_checked_in?' do
+    it 'calls `EventAttendant.has_checked_in?` with the event id and given_user id' do
+      allow(EventAttendant).to receive(:checked_in?)
       user = create(:user)
       event = create(:event)
-      create(:event_attendant, event: event, user: user)
 
-      result = event.checked_in?(user)
+      event.user_checked_in?(user)
 
-      expect(result).to eq(true)
+      expect(EventAttendant).to have_received(:checked_in?).with(event.id, user.id)
     end
 
-    it 'returns false if the given user have not checked in' do
-      user = create(:user)
+    it 'returns false if the given user is a Guest' do
+      user = Guest.new
       event = create(:event)
 
-      result = event.checked_in?(user)
+      result = event.user_checked_in?(user)
 
       expect(result).to eq(false)
     end
   end
 
-  describe '#checked_out?' do
-    it 'returns true if the given user have checked out' do
+  describe '#user_checked_out?' do
+    it 'calls `EventAttendant.checked_out?` with the event id and given_user id' do
+      allow(EventAttendant).to receive(:checked_out?)
       user = create(:user)
       event = create(:event)
-      create(
-        :event_attendant,
-        event: event,
-        user: user,
-        checked_in_at: 1.hour.ago,
-        checked_out_at: Time.zone.now,
-      )
 
-      result = event.checked_out?(user)
+      event.user_checked_out?(user)
 
-      expect(result).to eq(true)
+      expect(EventAttendant).to have_received(:checked_out?).with(event.id, user.id)
     end
 
-    it 'returns false if the given user have not checked out' do
-      user = create(:user)
+    it 'returns false if the given user is Guest object' do
+      user = Guest.new
       event = create(:event)
-      create(
-        :event_attendant,
-        event: event,
-        user: user,
-        checked_in_at: 1.hour.ago,
-        checked_out_at: nil,
-      )
 
-      result = event.checked_out?(user)
+      result = event.user_checked_in?(user)
 
       expect(result).to eq(false)
     end
