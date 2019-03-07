@@ -140,4 +140,16 @@ RSpec.describe EventAttendant, type: :model do
       expect(result).to eq(false)
     end
   end
+
+  describe '#check_out' do
+    it 'updates the checked_out_at to the current time' do
+      travel_to Time.new(2019, 1, 1, 10) do
+        event_attendant = create(:event_attendant)
+
+        event_attendant.check_out
+
+        expect(event_attendant.checked_out_at).to eq(Time.zone.now)
+      end
+    end
+  end
 end

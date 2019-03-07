@@ -8,18 +8,17 @@ class CheckInController < ApplicationController
   end
 
   def destroy
-    event_attendent = find_event_attendant
-    event_attendent.checked_out_at = Time.zone.now
-    event_attendent.save
+    find_event_attendant
+    event_attendant.check_out
     redirect_to events_path
   end
 
   private
 
-  attr_reader :event
+  attr_reader :event, :event_attendant
 
   def find_event_attendant
-    EventAttendant.find_by(event_id: params[:id], user_id: current_user.id)
+    @event_attendant = EventAttendant.find_by(event_id: params[:id], user_id: current_user.id)
   end
 
   def find_event

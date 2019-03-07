@@ -22,4 +22,8 @@ class EventAttendant < ApplicationRecord
 
     event_attendant.present? && event_attendant.checked_out_at.present?
   end
+
+  def check_out
+    update_attributes(checked_out_at: Time.zone.now)
+  end
 end
