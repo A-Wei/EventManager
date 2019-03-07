@@ -63,6 +63,12 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#guest?' do
+    it 'returns false' do
+      expect(User.new.guest?).to eq(false)
+    end
+  end
+
   describe '#create_reset_password_digest' do
     it 'calls Token.generate' do
       user = create(:user)

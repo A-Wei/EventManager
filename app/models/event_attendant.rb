@@ -6,7 +6,7 @@ class EventAttendant < ApplicationRecord
   validates :event_id, presence: true
 
   def self.checked_in?(event, user)
-    return false if user.is_a?(Guest)
+    return false if user.guest?
 
     event_attendant = EventAttendant.find_by(event_id: event.id, user_id: user.id)
 
@@ -16,7 +16,7 @@ class EventAttendant < ApplicationRecord
   end
 
   def self.checked_out?(event, user)
-    return false if user.is_a?(Guest)
+    return false if user.guest?
 
     event_attendant = EventAttendant.find_by(event_id: event.id, user_id: user.id)
 

@@ -37,6 +37,10 @@ class User < ApplicationRecord
     true
   end
 
+  def guest?
+    false
+  end
+
   def create_reset_password_digest
     self.reset_password_token = Token.generate
     update_column(:reset_password_digest, digested_token)
