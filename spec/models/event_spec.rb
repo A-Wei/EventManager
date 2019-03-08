@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
+  describe 'association' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:event_attendants) }
+    it { is_expected.to have_many(:attendants).through(:event_attendants) }
+  end
+
   describe 'validations' do
     describe '#title' do
       subject { build(:event) }

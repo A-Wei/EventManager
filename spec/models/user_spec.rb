@@ -127,4 +127,28 @@ RSpec.describe User, type: :model do
       expect(result).to eq(true)
     end
   end
+
+  describe '#checked_in?' do
+    it 'calls EventAttendant.checked_in? with event and user' do
+      allow(EventAttendant).to receive(:checked_in?)
+      user = build('user')
+      event = build('event')
+
+      user.checked_in?(event)
+
+      expect(EventAttendant).to have_received(:checked_in?).with(event, user)
+    end
+  end
+
+  describe '#checked_out?' do
+    it 'calls EventAttendant.checked_out? with event and user' do
+      allow(EventAttendant).to receive(:checked_out?)
+      user = build('user')
+      event = build('event')
+
+      user.checked_out?(event)
+
+      expect(EventAttendant).to have_received(:checked_out?).with(event, user)
+    end
+  end
 end

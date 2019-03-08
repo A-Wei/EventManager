@@ -23,6 +23,7 @@
                   <%= link_to 'Delete', event_path(event), method: :delete %>
                 </div>
               <% end %>
+              <%= check_in_button(event, current_user) %>
             </div>
           <% end %>
       </div>

@@ -37,6 +37,14 @@ class User < ApplicationRecord
     true
   end
 
+  def checked_in?(event)
+    EventAttendant.checked_in?(event, self)
+  end
+
+  def checked_out?(event)
+    EventAttendant.checked_out?(event, self)
+  end
+
   def create_reset_password_digest
     self.reset_password_token = Token.generate
     update_column(:reset_password_digest, digested_token)

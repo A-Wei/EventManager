@@ -5,6 +5,8 @@ class Event < ApplicationRecord
   MINIMUM_MATCHING_PERCENT = 0.2
 
   belongs_to :user
+  has_many :event_attendants
+  has_many :attendants, through: :event_attendants, source: :user
 
   validates :end_at, presence: true, in_future: true
   validates :start_at, presence: true, in_future: true

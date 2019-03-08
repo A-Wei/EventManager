@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_155053) do
+ActiveRecord::Schema.define(version: 2019_03_06_085027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "event_attendants", primary_key: "false", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "checked_in_at"
+    t.datetime "checked_out_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "user_id"], name: "index_event_attendants_on_event_id_and_user_id", unique: true
+    t.index ["event_id"], name: "index_event_attendants_on_event_id"
+    t.index ["user_id"], name: "index_event_attendants_on_user_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
