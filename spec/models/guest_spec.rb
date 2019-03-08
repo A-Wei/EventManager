@@ -7,9 +7,15 @@ RSpec.describe Guest, type: :model do
     end
   end
 
-  describe '#guest?' do
-    it 'returns true' do
-      expect(Guest.new.guest?).to eq(true)
+  describe '#checked_in?' do
+    it 'returns false' do
+      expect(Guest.new.checked_in?).to eq(false)
+    end
+  end
+
+  describe '#checked_out?' do
+    it 'returns false' do
+      expect(Guest.new.checked_out?).to eq(false)
     end
   end
 end

@@ -3,7 +3,11 @@ class Guest
     false
   end
 
-  def guest?
-    true
+  def checked_in?(*)
+    false
+  end
+
+  def checked_out?(*)
+    false
   end
 end

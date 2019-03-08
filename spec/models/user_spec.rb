@@ -63,12 +63,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#guest?' do
-    it 'returns false' do
-      expect(User.new.guest?).to eq(false)
-    end
-  end
-
   describe '#create_reset_password_digest' do
     it 'calls Token.generate' do
       user = create(:user)
@@ -131,6 +125,30 @@ RSpec.describe User, type: :model do
       result = user.reset_password_expired?
 
       expect(result).to eq(true)
+    end
+  end
+
+  describe '#checked_in?' do
+    it 'calls EventAttendant.checked_in? with event and user' do
+      allow(EventAttendant).to receive(:checked_in?)
+      user = build('user')
+      event = build('event')
+
+      user.checked_in?(event)
+
+      expect(EventAttendant).to have_received(:checked_in?).with(event, user)
+    end
+  end
+
+  describe '#checked_out?' do
+    it 'calls EventAttendant.checked_out? with event and user' do
+      allow(EventAttendant).to receive(:checked_out?)
+      user = build('user')
+      event = build('event')
+
+      user.checked_out?(event)
+
+      expect(EventAttendant).to have_received(:checked_out?).with(event, user)
     end
   end
 end

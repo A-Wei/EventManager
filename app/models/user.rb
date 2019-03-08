@@ -37,8 +37,12 @@ class User < ApplicationRecord
     true
   end
 
-  def guest?
-    false
+  def checked_in?(event)
+    EventAttendant.checked_in?(event, self)
+  end
+
+  def checked_out?(event)
+    EventAttendant.checked_out?(event, self)
   end
 
   def create_reset_password_digest

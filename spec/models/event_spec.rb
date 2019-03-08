@@ -126,28 +126,4 @@ RSpec.describe Event, type: :model do
       expect(result).to eq(false)
     end
   end
-
-  describe '#user_checked_in?' do
-    it 'calls `EventAttendant.checked_in?` with the event id and given_user id' do
-      allow(EventAttendant).to receive(:checked_in?)
-      user = create(:user)
-      event = create(:event)
-
-      event.user_checked_in?(user)
-
-      expect(EventAttendant).to have_received(:checked_in?).with(event, user)
-    end
-  end
-
-  describe '#user_checked_out?' do
-    it 'calls `EventAttendant.checked_out?` with the event id and given_user id' do
-      allow(EventAttendant).to receive(:checked_out?)
-      user = create(:user)
-      event = create(:event)
-
-      event.user_checked_out?(user)
-
-      expect(EventAttendant).to have_received(:checked_out?).with(event, user)
-    end
-  end
 end

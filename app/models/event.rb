@@ -34,14 +34,6 @@ class Event < ApplicationRecord
     user == given_user
   end
 
-  def user_checked_in?(user)
-    EventAttendant.checked_in?(self, user)
-  end
-
-  def user_checked_out?(user)
-    EventAttendant.checked_out?(self, user)
-  end
-
   private
 
   def end_at_ahead_of_start_at

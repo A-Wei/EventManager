@@ -8,8 +8,6 @@ class EventAttendant < ApplicationRecord
   validates_uniqueness_of :user, scope: :event_id, message: 'already checked in'
 
   def self.checked_in?(event, user)
-    return false if user.guest?
-
     event_attendant = EventAttendant.find_by(event_id: event.id, user_id: user.id)
 
     event_attendant.present? &&
@@ -18,8 +16,6 @@ class EventAttendant < ApplicationRecord
   end
 
   def self.checked_out?(event, user)
-    return false if user.guest?
-
     event_attendant = EventAttendant.find_by(event_id: event.id, user_id: user.id)
 
     event_attendant.present? && event_attendant.checked_out_at.present?
