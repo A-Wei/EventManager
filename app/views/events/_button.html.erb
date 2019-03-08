@@ -1,7 +1,0 @@
-<% if event.user_checked_in?(current_user) %>
-  <%= link_to 'Check Out', check_out_event_path(event), method: :delete %>
-<% elsif event.user_checked_out?(current_user) %>
-  <%= link_to 'Participated', event_path(event) %>
-<% else %>
-  <%= link_to 'Check In', check_in_event_path(event), method: :post %>
-<% end %>
