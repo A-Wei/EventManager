@@ -1,7 +1,7 @@
 ## Event_Manager
 
 ### Welcome
-Welcome to `Event Manager` Repo, this is the breakable toy project for my apprenticeship.
+Welcome to `Event Manager` Repo, this is the breakable toy project.
 Stories are tracked in [Monday.com](https://universalavenue.monday.com/boards/173844071/?advancedFilters=true)
 
 ### Functionality
