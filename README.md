@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/A-Wei/EventManager.svg?style=shield&circle-token=83ac3e0ae262dbce5653d1aa1d5492045fd0cc10)](https://circleci.com/gh/A-Wei/EventManager)
 ## Event_Manager
 
 ### Welcome
